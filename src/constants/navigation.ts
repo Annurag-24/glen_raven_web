@@ -25,6 +25,13 @@ export interface ActionItem {
   path: string;
 }
 
+export interface DrawerMenuItem {
+  name: string;
+  icon: string;
+  path?: string;
+  children?: { name: string; path: string }[];
+}
+
 export const menuItems: MenuItem[] = [
   { name: "Home", icon: HomeIcon, path: "/" },
   { name: "Orders", icon: OrdersIcon, path: "/orders" },
@@ -47,4 +54,21 @@ export const actionItems: ActionItem[] = [
   { name: "Find Invoice", icon: FindInvoiceIcon, path: "/find-invoice" },
   { name: "Resolve Holds", icon: ResolveHoldsIcon, path: "/resolve-holds" },
   { name: "Track Shipment", icon: TrackShipmentIcon, path: "/track-shipment" },
+];
+
+export const drawerMenuItems: DrawerMenuItem[] = [
+  { name: "Home", icon: HomeIcon, path: "/" },
+  { name: "Orders", icon: OrdersIcon, path: "/orders" },
+  { name: "Customers", icon: CustomersIcon, path: "/customers" },
+  { name: "Returns", icon: ReturnsIcon, path: "/returns" },
+  {
+    name: "Inventory",
+    icon: InventoryIcon,
+    children: [
+      { name: "Inventory Console", path: "/inventory" },
+      { name: "Adjust Inventory", path: "/inventory/adjust" },
+    ],
+  },
+  { name: "Quote Creation", icon: QuoteCreationIcon, path: "/quote-creation" },
+  { name: "Search Product", icon: SearchProductIcon, path: "/search-product" },
 ];

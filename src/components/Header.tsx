@@ -1,14 +1,15 @@
 import UserIcon from "@/assets/icons/user.png";
 import DownIcon from "@/assets/icons/chevron-down.svg";
+import { Link } from "react-router";
 
 const Header = () => {
   return (
     <div className="px-6 py-2 bg-white border-b border-slate-200 inline-flex flex-col justify-start items-center gap-2">
       <div className="self-stretch h-10 inline-flex justify-between items-center">
         <div className="w-[703.50px] flex justify-start items-center gap-3">
-          <div className="w-20 h-6 relative">
+          <Link to="/" className="w-20 h-6 relative">
             <img src="/logo.png" alt="Trivantage Logo" />
-          </div>
+          </Link>
         </div>
         <div className="flex justify-start items-center gap-3">
           <img
