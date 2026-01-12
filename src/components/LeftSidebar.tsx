@@ -1,12 +1,14 @@
-import { Link, useLocation } from "react-router";
-import { cn } from "@/lib/utils";
 import {
   menuItems,
   actionItems,
   type MenuItem,
   type ActionItem,
 } from "@/constants/navigation";
+import { cn } from "@/lib/utils";
+import { useState } from "react";
+import { Link, useLocation } from "react-router";
 import ChevronRightIcon from "@/assets/icons/chevron-right.svg";
+import LeftSidebarDrawer from "@/components/LeftSidebarDrawer";
 
 interface MenuSectionProps {
   items: MenuItem[];
@@ -105,6 +107,8 @@ const QuickActions = ({ items }: QuickActionsProps) => {
 };
 
 const LeftSidebar = () => {
+  const [showDrawer, setShowDrawer] = useState<boolean>(false);
+
   return (
     <aside className="px-3 py-5 relative bg-white border-r-[0.50px] border-slate-200 inline-flex flex-col justify-start items-center gap-7 h-screen">
       <div className="flex-1 flex flex-col justify-between items-center">
@@ -117,9 +121,14 @@ const LeftSidebar = () => {
       </div>
 
       {/* Top Right Corner Button */}
-      <button className="w-5 h-5 top-0 right-0 absolute bg-tertiary rounded-bl-[10px] flex flex-col justify-center items-center gap-2.5 hover:bg-tertiary/90 transition-colors">
+      <button
+        className="w-5 h-5 top-0 right-0 absolute bg-tertiary rounded-bl-[10px] flex flex-col justify-center items-center gap-2.5 hover:bg-tertiary/90 transition-colors"
+        onClick={() => setShowDrawer((prev) => !prev)}
+      >
         <img src={ChevronRightIcon} alt="Menu" className="w-4 h-4" />
       </button>
+
+      {showDrawer && <LeftSidebarDrawer setShowDrawer={setShowDrawer} />}
     </aside>
   );
 };
