@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import mailIcon from "@/assets/icons/mail.svg?raw";
 import passIcon from "@/assets/icons/password.svg?raw";
+import unlockIcon from "@/assets/icons/password-unlock.svg?raw";
 import loginBg from "@/assets/login-bg.svg?url";
 import logo from "@/assets/logo.png";
 import { Check } from "lucide-react";
@@ -10,6 +11,7 @@ const Login = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [agree, setAgree] = useState(false);
+    const [showPassword, setShowPassword] = useState(false);
 
     const onSubmit = (e: React.FormEvent) => {
         e.preventDefault();
@@ -62,7 +64,7 @@ const Login = () => {
                                             setEmail(e.target.value)
                                         }
                                         required
-                                        className="w-full rounded-md px-4 py-3 pr-12 bg-white border border-[#E0E0E0] placeholder-[#777C9B] text-base focus:outline-none focus:ring-4 focus:ring-[#036fed]/20"
+                                        className="w-full rounded-lg px-4 py-3 pr-12 bg-white border input-border text-base focus:outline-none focus:ring-2 focus:ring-blue-400"
                                     />
                                     <span
                                         className="icon-inline absolute right-4 top-1/2 -translate-y-1/2 opacity-90 w-6 h-6 inline-block"
@@ -79,21 +81,41 @@ const Login = () => {
                                 </label>
                                 <div className="relative">
                                     <input
-                                        type="password"
+                                        type={
+                                            showPassword ? "text" : "password"
+                                        }
                                         placeholder="*************"
                                         value={password}
                                         onChange={(e) =>
                                             setPassword(e.target.value)
                                         }
                                         required
-                                        className="w-full rounded-md px-4 py-3 pr-12 bg-white border border-[#E0E0E0] placeholder-[#777C9B] text-base focus:outline-none focus:ring-4 focus:ring-[#036fed]/20"
+                                        className="w-full rounded-lg px-4 py-3 pr-12 bg-white border input-border text-base focus:outline-none focus:ring-2 focus:ring-blue-400"
                                     />
-                                    <span
-                                        className="icon-inline absolute right-4 top-1/2 -translate-y-1/2 opacity-90 w-6 h-6 inline-block"
-                                        dangerouslySetInnerHTML={{
-                                            __html: passIcon,
-                                        }}
-                                    />
+                                    <button
+                                        type="button"
+                                        onClick={() =>
+                                            setShowPassword((s) => !s)
+                                        }
+                                        aria-label="Toggle password visibility"
+                                        className="absolute right-4 top-1/2 -translate-y-1/2 opacity-90 w-6 h-6 inline-flex items-center justify-center cursor-pointer"
+                                    >
+                                        {showPassword ? (
+                                            <span
+                                                className="w-6 h-6 inline-block"
+                                                dangerouslySetInnerHTML={{
+                                                    __html: unlockIcon,
+                                                }}
+                                            />
+                                        ) : (
+                                            <span
+                                                className="w-6 h-6 inline-block"
+                                                dangerouslySetInnerHTML={{
+                                                    __html: passIcon,
+                                                }}
+                                            />
+                                        )}
+                                    </button>
                                 </div>
                             </div>
 

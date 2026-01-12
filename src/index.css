@@ -69,6 +69,10 @@
   --tertiary: #036fed;
   --tertiary-foreground: #ffffff;
 
+  /* Custom input colors */
+  --input-placeholder: #71717A;
+  --input-border: #CBD5E1;
+
   --muted: oklch(0.97 0 0);
   --muted-foreground: oklch(0.556 0 0);
   --accent: oklch(0.97 0 0);
@@ -135,7 +139,19 @@
   * {
     @apply border-border outline-ring/50;
   }
+
   body {
     @apply bg-background text-foreground;
+  }
+
+  /* Apply placeholder color globally and provide a helper class for border color */
+  input::placeholder,
+  textarea::placeholder {
+    color: var(--input-placeholder);
+    opacity: 1;
+  }
+
+  .input-border {
+    border-color: var(--input-border) !important;
   }
 }
