@@ -32,12 +32,12 @@ export default function Search({
                     value={value}
                     onChange={(e) => setValue(e.target.value)}
                     placeholder={placeholder}
-                    className="flex-1 rounded-lg border px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-400 input-border"
+                    className="flex-1 h-12 rounded-lg border px-4 focus:outline-none focus:ring-2 focus:ring-blue-400 input-border"
                 />
                 <button
                     type="submit"
                     aria-label="Search"
-                    className="inline-flex items-center justify-center bg-tertiary text-tertiary-foreground hover:bg-tertiary/90 rounded-lg px-5 py-3 focus:outline-none focus:ring-2 focus:ring-tertiary/40"
+                    className="inline-flex items-center justify-center bg-tertiary text-tertiary-foreground hover:bg-tertiary/90 rounded-lg h-12 w-16 focus:outline-none focus:ring-2 focus:ring-tertiary/40 cursor-pointer"
                 >
                     <SearchIcon size={18} />
                 </button>
