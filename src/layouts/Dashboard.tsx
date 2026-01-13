@@ -12,7 +12,7 @@ const DashboardLayout = () => {
           <LeftSidebar />
         </div>
 
-        <main className="flex-1 overflow-y-auto p-4 bg-[#F9FAFB]">
+        <main className="flex-1 overflow-y-auto p-6 bg-[#F9FAFB]">
           <Outlet />
         </main>
       </div>
