@@ -23,7 +23,7 @@ export default function Search({
 
     return (
         <div className="w-full">
-            <h3 className="text-2xl font-semibold text-gray-800 mb-3">
+            <h3 className="text-lg font-bold leading-7 text-grey-600 mb-3">
                 {title}
             </h3>
             <form onSubmit={handleSubmit} className="flex items-center gap-3">

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import DashboardCard, { CardPrimaryText } from "@/components/DashboardCard";
 
 interface SavedItem {
     id: string;
@@ -23,13 +24,13 @@ export default function SavedSearches() {
     const items = tab === "orders" ? ORDERS : CUSTOMERS;
 
     return (
-        <div className="mt-6 bg-white border border-[#EEF2F6] rounded-2xl p-6 w-full h-full">
-            <div>
-                <h3 className="text-xl font-semibold text-gray-800">
-                    Saved Searches
-                </h3>
-
-                <div className="mt-3 border-b border-gray-100">
+        <DashboardCard
+            title="Saved Searches"
+            showViewAll={false}
+            wrapperClassName="w-full"
+        >
+            <div className="self-stretch flex flex-col justify-start items-start gap-4">
+                <div className="w-full border-b border-gray-100">
                     <nav className="flex gap-6 -mb-px">
                         <button
                             onClick={() => setTab("orders")}
@@ -54,28 +55,30 @@ export default function SavedSearches() {
                         </button>
                     </nav>
                 </div>
-            </div>
 
-            <div className="mt-4">
-                <ul className="divide-y divide-gray-100">
-                    {items.map((it) => (
-                        <li
-                            key={it.id}
-                            className="flex items-center justify-between py-3"
-                        >
-                            <div className="text-sm text-gray-700">
-                                {it.label}
-                            </div>
-                            <button
-                                onClick={() => console.log("run", it.label)}
-                                className="text-sm text-tertiary cursor-pointer hover:underline"
+                <div className="w-full">
+                    <ul className="flex flex-col gap-4">
+                        {items.map((it) => (
+                            <li
+                                key={it.id}
+                                className="flex items-center justify-between"
                             >
-                                Run
-                            </button>
-                        </li>
-                    ))}
-                </ul>
+                                <div className="flex-1">
+                                    <CardPrimaryText color="text-grey-500">
+                                        {it.label}
+                                    </CardPrimaryText>
+                                </div>
+                                <button
+                                    onClick={() => console.log("run", it.label)}
+                                    className="text-sm text-tertiary cursor-pointer hover:underline"
+                                >
+                                    Run
+                                </button>
+                            </li>
+                        ))}
+                    </ul>
+                </div>
             </div>
-        </div>
+        </DashboardCard>
     );
 }
