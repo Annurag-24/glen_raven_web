@@ -3,7 +3,7 @@ import DashboardCard, {
   CardSecondaryText,
 } from "@/components/dashboard/DashboardCard";
 import { cn } from "@/lib/utils";
-import Badge from "@/components/Badge";
+import Badge, { type BadgeVariant } from "@/components/Badge";
 
 const data = [
   {
@@ -29,7 +29,7 @@ const data = [
   },
 ];
 
-const getStatusVariant = (status: string) => {
+const getStatusVariant = (status: string): BadgeVariant => {
   switch (status) {
     case "Partially Received":
       return "warning";

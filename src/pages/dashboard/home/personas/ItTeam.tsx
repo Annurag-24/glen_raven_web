@@ -1,7 +1,17 @@
+import {
+  UserAccessSummaryCard,
+  IntegrationHealthMonitorCard,
+  JobExecutionSummaryCard,
+} from "@/components/dashboard/personas/it-team";
+
 const ItTeamPersona = () => {
   return (
     <>
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6"></div>
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+        <UserAccessSummaryCard />
+        <IntegrationHealthMonitorCard />
+        <JobExecutionSummaryCard />
+      </div>
     </>
   );
 };
