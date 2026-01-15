@@ -6,7 +6,7 @@ import DashboardCard, {
   CardTableRow,
   CardTableCell,
   CardTableCellPrimary,
-} from "@/components/DashboardCard";
+} from "@/components/dashboard/DashboardCard";
 
 const data = [
   {

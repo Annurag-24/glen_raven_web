@@ -1,7 +1,7 @@
 import DashboardCard, {
   CardPrimaryText,
   CardSecondaryText,
-} from "@/components/DashboardCard";
+} from "@/components/dashboard/DashboardCard";
 import { cn } from "@/lib/utils";
 import Badge from "@/components/Badge";
 

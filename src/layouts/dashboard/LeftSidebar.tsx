@@ -8,7 +8,7 @@ import { cn } from "@/lib/utils";
 import { useState } from "react";
 import { Link, useLocation } from "react-router";
 import ChevronRightIcon from "@/assets/icons/chevron-right.svg";
-import LeftSidebarDrawer from "@/components/LeftSidebarDrawer";
+import LeftSidebarDrawer from "@/layouts/dashboard/LeftSidebarDrawer";
 
 interface IMenuSectionProps {
   items: MenuItem[];

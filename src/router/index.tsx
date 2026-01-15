@@ -5,8 +5,8 @@ import { createBrowserRouter, Navigate } from "react-router";
 import LazyRoute from "@/components/LazyRoute";
 
 // layouts
-import AuthLayout from "@/layouts/Auth";
-import DashboardLayout from "@/layouts/Dashboard";
+import AuthLayout from "@/layouts/auth";
+import DashboardLayout from "@/layouts/dashboard";
 
 // error boundary
 import ErrorBoundary from "@/components/ErrorBoundary";
