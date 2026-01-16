@@ -1,8 +1,8 @@
 import {
   menuItems,
   actionItems,
-  type MenuItem,
-  type ActionItem,
+  type IMenuItem,
+  type IActionItem,
 } from "@/constants/navigation";
 import { cn } from "@/lib/utils";
 import { useState } from "react";
@@ -11,29 +11,31 @@ import ChevronRightIcon from "@/assets/icons/chevron-right.svg";
 import LeftSidebarDrawer from "@/layouts/dashboard/LeftSidebarDrawer";
 
 interface IMenuSectionProps {
-  items: MenuItem[];
-  currentPath: string;
-  onItemClick: (item: MenuItem) => void;
+  items: IMenuItem[];
+  onItemClick: (item: IMenuItem) => void;
+  isItemActive: (item: IMenuItem) => boolean;
 }
 
 interface IQuickActionsProps {
-  items: ActionItem[];
-  currentPath: string;
-  onItemClick: (item: ActionItem) => void;
+  items: IActionItem[];
+  onItemClick: (item: IActionItem) => void;
+  isItemActive: (item: IActionItem) => boolean;
 }
 
-interface LeftSidebarProps {
+interface ILeftSidebarProps {
   addTab: (tab: {
     id: string;
     title: string;
     content: React.ReactNode;
   }) => void;
+  activeTabId: string | null;
+  goToHome: () => void;
 }
 
 const MenuSection = ({
   items,
-  currentPath,
   onItemClick,
+  isItemActive,
 }: IMenuSectionProps) => {
   return (
     <div className="self-stretch flex flex-col justify-start items-center gap-1.5">
@@ -42,7 +44,7 @@ const MenuSection = ({
       </div>
 
       {items.map((item, index) => {
-        const isActive = currentPath === item.path;
+        const isActive = isItemActive(item);
 
         return (
           <button
@@ -88,13 +90,13 @@ const MenuSection = ({
 
 const QuickActions = ({
   items,
-  currentPath,
   onItemClick,
+  isItemActive,
 }: IQuickActionsProps) => {
   return (
     <div className="self-stretch flex flex-col justify-start items-center gap-2 mb-2">
       {items.map((item, index) => {
-        const isActive = currentPath === item.path;
+        const isActive = isItemActive(item);
 
         return (
           <button
@@ -138,16 +140,24 @@ const QuickActions = ({
   );
 };
 
-const LeftSidebar = ({ addTab }: LeftSidebarProps) => {
+const LeftSidebar = ({ addTab, activeTabId, goToHome }: ILeftSidebarProps) => {
   const location = useLocation();
   const navigate = useNavigate();
   const currentPath = location.pathname;
 
   const [showDrawer, setShowDrawer] = useState<boolean>(false);
 
-  const handleMenuClick = (item: MenuItem) => {
+  // Determine if an item is active based on tab or home page
+  const isItemActive = (item: IMenuItem | IActionItem) => {
+    if (item.path === "/" && currentPath === "/") {
+      return activeTabId === null; // Home is active only when no tab is selected
+    }
+    return activeTabId === item.id; // Check against active tab ID
+  };
+
+  const handleMenuClick = (item: IMenuItem) => {
     if (item.isHome || item.path === "/") {
-      // Navigate to home (no tab)
+      goToHome();
       navigate("/");
     } else if (item.getContent) {
       // Open as tab with content from getContent
@@ -159,7 +169,7 @@ const LeftSidebar = ({ addTab }: LeftSidebarProps) => {
     }
   };
 
-  const handleActionClick = (item: ActionItem) => {
+  const handleActionClick = (item: IActionItem) => {
     if (item.getContent) {
       addTab({
         id: item.id,
@@ -174,8 +184,8 @@ const LeftSidebar = ({ addTab }: LeftSidebarProps) => {
       <div className="flex-1 flex flex-col justify-between items-center w-full">
         <MenuSection
           items={menuItems}
-          currentPath={currentPath}
           onItemClick={handleMenuClick}
+          isItemActive={isItemActive}
         />
 
         {/* Divider */}
@@ -183,8 +193,8 @@ const LeftSidebar = ({ addTab }: LeftSidebarProps) => {
 
         <QuickActions
           items={actionItems}
-          currentPath={currentPath}
           onItemClick={handleActionClick}
+          isItemActive={isItemActive}
         />
       </div>
 
@@ -197,7 +207,12 @@ const LeftSidebar = ({ addTab }: LeftSidebarProps) => {
       </button>
 
       {showDrawer && (
-        <LeftSidebarDrawer setShowDrawer={setShowDrawer} addTab={addTab} />
+        <LeftSidebarDrawer
+          setShowDrawer={setShowDrawer}
+          addTab={addTab}
+          activeTabId={activeTabId}
+          goToHome={goToHome}
+        />
       )}
     </aside>
   );

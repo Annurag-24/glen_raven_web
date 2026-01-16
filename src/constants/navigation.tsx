@@ -14,7 +14,7 @@ import ResolveHoldsIcon from "@/assets/icons/resolve-holds.svg";
 import TrackShipmentIcon from "@/assets/icons/track-shipment.svg";
 import AllOrders from "@/pages/dashboard/tabs/orders/All";
 
-export interface MenuItem {
+export interface IMenuItem {
   id: string;
   name: string;
   icon: string;
@@ -23,7 +23,7 @@ export interface MenuItem {
   getContent?: () => React.ReactNode;
 }
 
-export interface ActionItem {
+export interface IActionItem {
   id: string;
   name: string;
   icon: string;
@@ -31,7 +31,7 @@ export interface ActionItem {
   getContent?: () => React.ReactNode;
 }
 
-export interface DrawerMenuItem {
+export interface IDrawerMenuItem {
   id: string;
   name: string;
   icon: string;
@@ -45,7 +45,7 @@ export interface DrawerMenuItem {
   }[];
 }
 
-export const menuItems: MenuItem[] = [
+export const menuItems: IMenuItem[] = [
   {
     id: "home",
     name: "Home",
@@ -97,7 +97,7 @@ export const menuItems: MenuItem[] = [
   },
 ];
 
-export const actionItems: ActionItem[] = [
+export const actionItems: IActionItem[] = [
   {
     id: "create-order",
     name: "Create Order",
@@ -149,7 +149,7 @@ export const actionItems: ActionItem[] = [
   },
 ];
 
-export const drawerMenuItems: DrawerMenuItem[] = [
+export const drawerMenuItems: IDrawerMenuItem[] = [
   {
     id: "home",
     name: "Home",

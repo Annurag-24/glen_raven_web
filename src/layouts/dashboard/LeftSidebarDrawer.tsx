@@ -1,8 +1,8 @@
 import {
   actionItems,
   drawerMenuItems,
-  type DrawerMenuItem,
-  type ActionItem,
+  type IDrawerMenuItem,
+  type IActionItem,
 } from "@/constants/navigation";
 import { cn } from "@/lib/utils";
 import { useState } from "react";
@@ -10,12 +10,11 @@ import { useLocation, useNavigate } from "react-router";
 import ChevronRightIcon from "@/assets/icons/chevron-right.svg";
 
 interface IMenuSectionProps {
-  items: DrawerMenuItem[];
-  currentPath: string;
+  items: IDrawerMenuItem[];
   expandedItems: number[];
   toggleExpanded: (index: number) => void;
   onItemClick: (
-    item: DrawerMenuItem,
+    item: IDrawerMenuItem,
     child?: {
       id: string;
       name: string;
@@ -23,11 +22,13 @@ interface IMenuSectionProps {
       getContent?: () => React.ReactNode;
     }
   ) => void;
+  isItemActive: (id: string) => boolean;
+  isChildActive: (id: string) => boolean;
 }
 
 interface IQuickLinksProps {
-  items: ActionItem[];
-  onItemClick: (item: ActionItem) => void;
+  items: IActionItem[];
+  onItemClick: (item: IActionItem) => void;
 }
 
 interface ILeftSidebarDrawerProps {
@@ -37,21 +38,24 @@ interface ILeftSidebarDrawerProps {
     title: string;
     content: React.ReactNode;
   }) => void;
+  activeTabId: string | null;
+  goToHome: () => void;
 }
 
 const MenuSection = ({
   items,
-  currentPath,
   expandedItems,
   toggleExpanded,
   onItemClick,
+  isItemActive,
+  isChildActive,
 }: IMenuSectionProps) => {
   return (
     <div className="flex flex-col gap-2">
       {items.map((item, index) => {
         const isExpanded = expandedItems.includes(index);
         const hasChildren = item.children && item.children.length > 0;
-        const isActive = item.path && currentPath === item.path;
+        const isActive = isItemActive(item.id);
 
         return (
           <div key={index} className="flex flex-col">
@@ -125,14 +129,14 @@ const MenuSection = ({
             {hasChildren && isExpanded && (
               <div className="ml-5 mt-1 flex flex-col gap-1 border-l-2 border-gray-200 pl-6">
                 {item.children!.map((child, childIndex) => {
-                  const isChildActive = currentPath === child.path;
+                  const isChildActiveState = isChildActive(child.id);
                   return (
                     <button
                       key={childIndex}
                       onClick={() => onItemClick(item, child)}
                       className={cn(
                         "p-1.5 rounded-md text-sm transition-colors w-full text-left",
-                        isChildActive
+                        isChildActiveState
                           ? "bg-tertiary/20 text-tertiary font-semibold"
                           : "text-gray-600 hover:bg-gray-100"
                       )}
@@ -185,6 +189,8 @@ const QuickLinks = ({ items, onItemClick }: IQuickLinksProps) => {
 const LeftSidebarDrawer: React.FC<ILeftSidebarDrawerProps> = ({
   setShowDrawer,
   addTab,
+  activeTabId,
+  goToHome,
 }) => {
   const location = useLocation();
   const navigate = useNavigate();
@@ -197,8 +203,21 @@ const LeftSidebarDrawer: React.FC<ILeftSidebarDrawerProps> = ({
     );
   };
 
+  // Check if an item is active based on activeTabId
+  const isItemActive = (id: string) => {
+    if (id === "home" && currentPath === "/") {
+      return activeTabId === null;
+    }
+    return activeTabId === id;
+  };
+
+  // Check if a child item is active
+  const isChildActive = (id: string) => {
+    return activeTabId === id;
+  };
+
   const handleMenuItemClick = (
-    item: DrawerMenuItem,
+    item: IDrawerMenuItem,
     child?: {
       id: string;
       name: string;
@@ -212,6 +231,7 @@ const LeftSidebarDrawer: React.FC<ILeftSidebarDrawerProps> = ({
 
     if (path === "/") {
       // Navigate to home
+      goToHome();
       navigate("/");
       setShowDrawer(false);
     } else {
@@ -231,7 +251,7 @@ const LeftSidebarDrawer: React.FC<ILeftSidebarDrawerProps> = ({
     }
   };
 
-  const handleQuickLinkClick = (item: ActionItem) => {
+  const handleQuickLinkClick = (item: IActionItem) => {
     if (item.getContent) {
       addTab({
         id: item.id,
@@ -256,10 +276,11 @@ const LeftSidebarDrawer: React.FC<ILeftSidebarDrawerProps> = ({
           {/* Menu Items Section */}
           <MenuSection
             items={drawerMenuItems}
-            currentPath={currentPath}
             expandedItems={expandedItems}
             toggleExpanded={toggleExpanded}
             onItemClick={handleMenuItemClick}
+            isItemActive={isItemActive}
+            isChildActive={isChildActive}
           />
 
           {/* Divider */}
