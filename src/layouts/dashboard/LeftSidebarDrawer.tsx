@@ -6,7 +6,7 @@ import {
 } from "@/constants/navigation";
 import { cn } from "@/lib/utils";
 import { useState } from "react";
-import { Link, useLocation } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 import ChevronRightIcon from "@/assets/icons/chevron-right.svg";
 
 interface IMenuSectionProps {
@@ -14,10 +14,29 @@ interface IMenuSectionProps {
   currentPath: string;
   expandedItems: number[];
   toggleExpanded: (index: number) => void;
+  onItemClick: (
+    item: DrawerMenuItem,
+    child?: {
+      id: string;
+      name: string;
+      path: string;
+      getContent?: () => React.ReactNode;
+    }
+  ) => void;
 }
 
 interface IQuickLinksProps {
   items: ActionItem[];
+  onItemClick: (item: ActionItem) => void;
+}
+
+interface ILeftSidebarDrawerProps {
+  setShowDrawer: React.Dispatch<React.SetStateAction<boolean>>;
+  addTab: (tab: {
+    id: string;
+    title: string;
+    content: React.ReactNode;
+  }) => void;
 }
 
 const MenuSection = ({
@@ -25,6 +44,7 @@ const MenuSection = ({
   currentPath,
   expandedItems,
   toggleExpanded,
+  onItemClick,
 }: IMenuSectionProps) => {
   return (
     <div className="flex flex-col gap-2">
@@ -73,10 +93,10 @@ const MenuSection = ({
                 />
               </button>
             ) : (
-              <Link
-                to={item.path!}
+              <button
+                onClick={() => onItemClick(item)}
                 className={cn(
-                  "p-2 rounded-md flex items-center gap-3 transition-colors",
+                  "p-2 rounded-md flex items-center gap-3 transition-colors w-full text-left",
                   isActive
                     ? "bg-tertiary text-white"
                     : "text-gray-500 hover:bg-gray-100"
@@ -98,7 +118,7 @@ const MenuSection = ({
                 >
                   {item.name}
                 </span>
-              </Link>
+              </button>
             )}
 
             {/* Nested Children */}
@@ -107,18 +127,18 @@ const MenuSection = ({
                 {item.children!.map((child, childIndex) => {
                   const isChildActive = currentPath === child.path;
                   return (
-                    <Link
+                    <button
                       key={childIndex}
-                      to={child.path}
+                      onClick={() => onItemClick(item, child)}
                       className={cn(
-                        "p-1.5 rounded-md text-sm transition-colors",
+                        "p-1.5 rounded-md text-sm transition-colors w-full text-left",
                         isChildActive
                           ? "bg-tertiary/20 text-tertiary font-semibold"
                           : "text-gray-600 hover:bg-gray-100"
                       )}
                     >
                       {child.name}
-                    </Link>
+                    </button>
                   );
                 })}
               </div>
@@ -130,7 +150,7 @@ const MenuSection = ({
   );
 };
 
-const QuickLinks = ({ items }: IQuickLinksProps) => {
+const QuickLinks = ({ items, onItemClick }: IQuickLinksProps) => {
   return (
     <div className="flex flex-col gap-2">
       <div className="text-gray-500 text-xs font-semibold uppercase tracking-wide mb-2">
@@ -138,9 +158,9 @@ const QuickLinks = ({ items }: IQuickLinksProps) => {
       </div>
       <div className="grid grid-cols-2 gap-3">
         {items.map((item, index) => (
-          <Link
+          <button
             key={index}
-            to={item.path}
+            onClick={() => onItemClick(item)}
             className="flex flex-col justify-start items-center gap-1 group"
           >
             <div className="p-2.5 bg-white rounded shadow-[0px_0px_5px_0px_rgba(0,0,0,0.08)] flex flex-col justify-start items-start gap-2.5 overflow-hidden group-hover:bg-tertiary">
@@ -155,21 +175,19 @@ const QuickLinks = ({ items }: IQuickLinksProps) => {
             <div className="justify-start text-gray-500 text-[12px] font-medium group-hover:text-tertiary">
               {item.name}
             </div>
-          </Link>
+          </button>
         ))}
       </div>
     </div>
   );
 };
 
-interface ILeftSidebarDrawerProps {
-  setShowDrawer: React.Dispatch<React.SetStateAction<boolean>>;
-}
-
 const LeftSidebarDrawer: React.FC<ILeftSidebarDrawerProps> = ({
   setShowDrawer,
+  addTab,
 }) => {
   const location = useLocation();
+  const navigate = useNavigate();
   const currentPath = location.pathname;
   const [expandedItems, setExpandedItems] = useState<number[]>([]);
 
@@ -177,6 +195,51 @@ const LeftSidebarDrawer: React.FC<ILeftSidebarDrawerProps> = ({
     setExpandedItems((prev) =>
       prev.includes(index) ? prev.filter((i) => i !== index) : [...prev, index]
     );
+  };
+
+  const handleMenuItemClick = (
+    item: DrawerMenuItem,
+    child?: {
+      id: string;
+      name: string;
+      path: string;
+      getContent?: () => React.ReactNode;
+    }
+  ) => {
+    const path = child?.path || item.path;
+
+    if (!path) return;
+
+    if (path === "/") {
+      // Navigate to home
+      navigate("/");
+      setShowDrawer(false);
+    } else {
+      // Open as tab using getContent
+      const id = child?.id || item.id;
+      const title = child?.name || item.name;
+      const getContent = child?.getContent || item.getContent;
+
+      if (getContent) {
+        addTab({
+          id: id,
+          title: title,
+          content: getContent(),
+        });
+      }
+      setShowDrawer(false);
+    }
+  };
+
+  const handleQuickLinkClick = (item: ActionItem) => {
+    if (item.getContent) {
+      addTab({
+        id: item.id,
+        title: item.name,
+        content: item.getContent(),
+      });
+    }
+    setShowDrawer(false);
   };
 
   return (
@@ -196,13 +259,14 @@ const LeftSidebarDrawer: React.FC<ILeftSidebarDrawerProps> = ({
             currentPath={currentPath}
             expandedItems={expandedItems}
             toggleExpanded={toggleExpanded}
+            onItemClick={handleMenuItemClick}
           />
 
           {/* Divider */}
           <div className="w-full h-[0.60px] bg-gray-300"></div>
 
           {/* Quick Links Section */}
-          <QuickLinks items={actionItems} />
+          <QuickLinks items={actionItems} onItemClick={handleQuickLinkClick} />
         </div>
 
         {/* Top Right Corner Button */}
