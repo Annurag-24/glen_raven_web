@@ -1,4 +1,3 @@
-import React from "react";
 import DashboardCard from "@/components/dashboard/DashboardCard";
 
 const items = [
