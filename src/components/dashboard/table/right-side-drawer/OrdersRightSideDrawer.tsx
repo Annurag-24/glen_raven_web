@@ -4,13 +4,12 @@ import RightSideDrawer, {
 } from "@/components/dashboard/table/right-side-drawer";
 import Divider from "@/components/Divider";
 import { Input } from "@/components/ui/input";
-import { useState } from "react";
 
 interface ILineItem {
   trackingId: string;
   description: string;
   details: string;
-  quantity: number;
+  quantity: string;
   unit: string;
   price: string;
   imageUrl: string;
@@ -56,7 +55,7 @@ const TotalLineItems = () => {
       trackingId: "1Z999AA10123456784",
       description: "Serge Ferrari Soltis Proof 502",
       details: "878438 Black, Size Standard Pack 43.745 Yards",
-      quantity: 80,
+      quantity: "80.00",
       unit: "Yard",
       price: "$329.99",
       imageUrl: "https://placehold.co/68x71",
@@ -65,7 +64,7 @@ const TotalLineItems = () => {
       trackingId: "1Z999AA10123456785",
       description: "Serge Ferrari Soltis Proof 502",
       details: "878438 Black, Size Standard Pack 43.745 Yards",
-      quantity: 80,
+      quantity: "80.00",
       unit: "Yard",
       price: "$329.99",
       imageUrl: "https://placehold.co/68x71",
@@ -74,7 +73,7 @@ const TotalLineItems = () => {
       trackingId: "1Z999AA10123456785",
       description: "Serge Ferrari Soltis Proof 502",
       details: "878438 Black, Size Standard Pack 43.745 Yards",
-      quantity: 80,
+      quantity: "80.00",
       unit: "Yard",
       price: "$329.99",
       imageUrl: "https://placehold.co/68x71",
@@ -102,8 +101,6 @@ const TotalLineItems = () => {
 };
 
 const ItemCard: React.FC<IItemCardProps> = ({ item }) => {
-  const [quantity, setQuantity] = useState<number>(item.quantity);
-
   return (
     <div className="w-full p-2.5 bg-white rounded-lg outline-1 -outline-offset-1 outline-gray-200 flex flex-col gap-3">
       <div className="flex items-start gap-2.5">
@@ -133,9 +130,9 @@ const ItemCard: React.FC<IItemCardProps> = ({ item }) => {
         <div className="flex items-center gap-1.5">
           <span className="text-gray-500 text-xs font-normal">Qty.</span>
           <Input
-            value={quantity}
-            onChange={(e) => setQuantity(Number(e.target.value))}
-            className="w-16 h-7 px-3 py-1.5 rounded outline-[0.30px] outline-offset-[-0.30px] outline-gray-500 flex justify-center items-center text-gray-500 text-xs! font-normal"
+            value={item.quantity}
+            className="w-16 h-7 px-3 py-1.5 rounded outline-[0.30px] outline-offset-[-0.30px] outline-gray-500 flex justify-center items-center text-gray-500 text-xs! font-normal disabled:opacity-70"
+            disabled
           />
           <span className="text-gray-500 text-xs font-normal">{item.unit}</span>
         </div>
