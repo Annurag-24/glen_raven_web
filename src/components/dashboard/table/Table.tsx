@@ -1,9 +1,10 @@
-import { AgGridReact } from "ag-grid-react";
 import {
   AllCommunityModule,
   ModuleRegistry,
   type ColDef,
+  type RowClickedEvent,
 } from "ag-grid-community";
+import { AgGridReact } from "ag-grid-react";
 
 // Register all Community features
 ModuleRegistry.registerModules([AllCommunityModule]);
@@ -11,9 +12,10 @@ ModuleRegistry.registerModules([AllCommunityModule]);
 interface TableProps {
   rowData: Array<Record<string, unknown>>;
   columnDefs: ColDef[];
+  onRowClicked?: (event: RowClickedEvent) => void;
 }
 
-const Table: React.FC<TableProps> = ({ rowData, columnDefs }) => {
+const Table: React.FC<TableProps> = ({ rowData, columnDefs, onRowClicked }) => {
   return (
     <div className="ag-theme-alpine w-full">
       <AgGridReact
@@ -22,6 +24,7 @@ const Table: React.FC<TableProps> = ({ rowData, columnDefs }) => {
         rowHeight={40}
         headerHeight={40}
         domLayout="autoHeight"
+        onRowClicked={onRowClicked}
       />
 
       <style>{`

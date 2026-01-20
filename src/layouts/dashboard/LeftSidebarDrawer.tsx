@@ -20,7 +20,7 @@ interface IMenuSectionProps {
       name: string;
       path: string;
       getContent?: () => React.ReactNode;
-    }
+    },
   ) => void;
   isItemActive: (id: string) => boolean;
   isChildActive: (id: string) => boolean;
@@ -66,7 +66,7 @@ const MenuSection = ({
                   "p-2 rounded-md flex items-center justify-between gap-3 transition-colors w-full text-left",
                   isExpanded
                     ? "bg-tertiary text-white"
-                    : "text-gray-500 hover:bg-gray-100"
+                    : "text-gray-500 hover:bg-gray-100",
                 )}
               >
                 <div className="flex items-center gap-3">
@@ -75,13 +75,13 @@ const MenuSection = ({
                     alt={item.name}
                     className={cn(
                       "w-5 h-5 transition-all",
-                      isExpanded && "brightness-0 invert"
+                      isExpanded && "brightness-0 invert",
                     )}
                   />
                   <span
                     className={cn(
                       "justify-start text-base font-normal",
-                      isExpanded ? "text-white" : "text-gray-500"
+                      isExpanded ? "text-white" : "text-gray-500",
                     )}
                   >
                     {item.name}
@@ -92,7 +92,7 @@ const MenuSection = ({
                   alt="Menu"
                   className={cn(
                     "w-6 h-6 transition-transform",
-                    isExpanded ? "rotate-270" : "rotate-90 invert opacity-70"
+                    isExpanded ? "rotate-270" : "rotate-90 invert opacity-70",
                   )}
                 />
               </button>
@@ -103,7 +103,7 @@ const MenuSection = ({
                   "p-2 rounded-md flex items-center gap-3 transition-colors w-full text-left",
                   isActive
                     ? "bg-tertiary text-white"
-                    : "text-gray-500 hover:bg-gray-100"
+                    : "text-gray-500 hover:bg-gray-100",
                 )}
               >
                 <img
@@ -111,13 +111,13 @@ const MenuSection = ({
                   alt={item.name}
                   className={cn(
                     "w-5 h-5 transition-all",
-                    isActive && "brightness-0 invert"
+                    isActive && "brightness-0 invert",
                   )}
                 />
                 <span
                   className={cn(
                     "justify-start text-base font-normal",
-                    isActive ? "text-white" : "text-gray-500"
+                    isActive ? "text-white" : "text-gray-500",
                   )}
                 >
                   {item.name}
@@ -138,7 +138,7 @@ const MenuSection = ({
                         "p-1.5 rounded-md text-sm transition-colors w-full text-left",
                         isChildActiveState
                           ? "bg-tertiary/20 text-tertiary font-semibold"
-                          : "text-gray-600 hover:bg-gray-100"
+                          : "text-gray-600 hover:bg-gray-100",
                       )}
                     >
                       {child.name}
@@ -199,7 +199,7 @@ const LeftSidebarDrawer: React.FC<ILeftSidebarDrawerProps> = ({
 
   const toggleExpanded = (index: number) => {
     setExpandedItems((prev) =>
-      prev.includes(index) ? prev.filter((i) => i !== index) : [...prev, index]
+      prev.includes(index) ? prev.filter((i) => i !== index) : [...prev, index],
     );
   };
 
@@ -223,7 +223,7 @@ const LeftSidebarDrawer: React.FC<ILeftSidebarDrawerProps> = ({
       name: string;
       path: string;
       getContent?: () => React.ReactNode;
-    }
+    },
   ) => {
     const path = child?.path || item.path;
 

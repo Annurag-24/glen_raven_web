@@ -1,7 +1,9 @@
+import { useState } from "react";
 import { type ColDef } from "ag-grid-community";
 import Table from "@/components/dashboard/table/Table";
 import Badge, { type BadgeVariant } from "@/components/Badge";
 import Pagination from "@/components/dashboard/table/Pagination";
+import OrdersRightSideDrawer from "@/components/dashboard/table/right-side-drawer/OrdersRightSideDrawer";
 
 const getStatusVariant = (status: string): BadgeVariant => {
   switch (status) {
@@ -61,9 +63,25 @@ const rowData = [
 ];
 
 const OrdersTable = () => {
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const [selectedOrder, setSelectedOrder] = useState<
+    (typeof rowData)[0] | null
+  >(null);
+
+  const handleRowClick = (data: (typeof rowData)[0]) => {
+    setSelectedOrder(data);
+    setIsDrawerOpen(true);
+  };
+
+  console.log("selectedOrder:", selectedOrder);
+
   return (
     <div className="p-4 bg-white rounded-lg">
-      <Table rowData={rowData} columnDefs={colDefs} />
+      <Table
+        rowData={rowData}
+        columnDefs={colDefs}
+        onRowClicked={(event) => handleRowClick(event.data)}
+      />
 
       <div className="mt-5">
         <Pagination
@@ -72,6 +90,11 @@ const OrdersTable = () => {
           onPageChange={(page) => console.log("Page changed to:", page)}
         />
       </div>
+
+      <OrdersRightSideDrawer
+        isOpen={isDrawerOpen}
+        onClose={() => setIsDrawerOpen(false)}
+      />
     </div>
   );
 };
