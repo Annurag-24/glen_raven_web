@@ -53,11 +53,10 @@ export default function AlertsExceptionsCard() {
                         {data.map((d, idx) => (
                             <div
                                 key={d.ref}
-                                className={`py-4 flex items-center justify-between ${
-                                    idx !== data.length - 1
+                                className={`py-4 flex items-center justify-between ${idx !== data.length - 1
                                         ? "border-b border-gray-100"
                                         : ""
-                                }`}
+                                    }`}
                             >
                                 <div>
                                     <CardPrimaryText className="mb-1">

@@ -13,6 +13,7 @@ import FindInvoiceIcon from "@/assets/icons/find-invoice.svg";
 import ResolveHoldsIcon from "@/assets/icons/resolve-holds.svg";
 import TrackShipmentIcon from "@/assets/icons/track-shipment.svg";
 import AllOrders from "@/pages/dashboard/tabs/orders/All";
+import OrderTracking from "@/pages/dashboard/tabs/orders/orderTrack";
 
 export interface IMenuItem {
   id: string;
@@ -59,6 +60,13 @@ export const menuItems: IMenuItem[] = [
     icon: OrdersIcon,
     path: "/orders",
     getContent: () => <AllOrders />,
+  },
+  {
+    id: "ordertracking",
+    name: "Orders Tracking",
+    icon: OrdersIcon,
+    path: "/orders",
+    getContent: () => <OrderTracking />,
   },
   {
     id: "customers",

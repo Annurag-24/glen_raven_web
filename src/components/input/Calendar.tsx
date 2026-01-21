@@ -47,6 +47,7 @@ export default function Calendar({
         setIsOpen(false);
     };
 
+    
     const handleClear = (e: React.MouseEvent) => {
         e.stopPropagation();
         setInternalDate(undefined);
@@ -95,10 +96,9 @@ export default function Calendar({
                 type="button"
                 disabled={disabled}
                 onClick={() => setIsOpen(!isOpen)}
-                className={`flex items-center justify-between px-3 py-2 text-sm hover:border-gray-300 focus:outline-none focus:ring-1 focus:ring-blue-500 disabled:text-gray-400 disabled:cursor-not-allowed ${
-                    className ||
+                className={`flex items-center justify-between px-3 py-2 text-sm hover:border-gray-300 focus:outline-none focus:ring-1 focus:ring-blue-500 disabled:text-gray-400 disabled:cursor-not-allowed ${className ||
                     "w-full bg-white border border-[#E0E0E0] rounded-sm disabled:bg-gray-50"
-                }`}
+                    }`}
             >
                 <span
                     className={

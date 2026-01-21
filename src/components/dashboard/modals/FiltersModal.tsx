@@ -11,13 +11,13 @@ export type FilterField = {
     key: string;
     label: string;
     type:
-        | "select"
-        | "multiselect"
-        | "text"
-        | "input"
-        | "date"
-        | "number"
-        | "select-component";
+    | "select"
+    | "multiselect"
+    | "text"
+    | "input"
+    | "date"
+    | "number"
+    | "select-component";
     placeholder?: string;
     options?: FilterFieldOption[];
 };
@@ -119,16 +119,16 @@ export default function FiltersModal({
                         {(f.type === "input" ||
                             f.type === "text" ||
                             f.type === "number") && (
-                            <input
-                                type={f.type === "number" ? "number" : "text"}
-                                placeholder={f.placeholder ?? ""}
-                                value={String(values[f.key] ?? "")}
-                                onChange={(e) =>
-                                    setValue(f.key, e.target.value)
-                                }
-                                className="mt-1 block w-full rounded-sm border border-[#E0E0E0] bg-white py-2 px-3 text-sm text-[#242424] placeholder-[#707070] focus:outline-none focus:ring-1 focus:ring-blue-500"
-                            />
-                        )}
+                                <input
+                                    type={f.type === "number" ? "number" : "text"}
+                                    placeholder={f.placeholder ?? ""}
+                                    value={String(values[f.key] ?? "")}
+                                    onChange={(e) =>
+                                        setValue(f.key, e.target.value)
+                                    }
+                                    className="mt-1 block w-full rounded-sm border border-[#E0E0E0] bg-white py-2 px-3 text-sm text-[#242424] placeholder-[#707070] focus:outline-none focus:ring-1 focus:ring-blue-500"
+                                />
+                            )}
 
                         {f.type === "date" && (
                             <Calendar
