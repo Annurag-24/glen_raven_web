@@ -14,7 +14,8 @@ export type BadgeVariant =
   | "delivered"
   | "cancelled"
   | "trivant"
-  | "active";
+  | "active"
+  | "included";
 
 interface IBadgeProps {
   title: string;
@@ -23,7 +24,7 @@ interface IBadgeProps {
   textClassName?: string;
 }
 
-const variantStyles = {
+const variantStyles: Record<BadgeVariant, string> = {
   warning: "bg-amber-100 text-amber-800",
   success: "bg-green-100 text-green-800",
   error: "bg-red-100 text-red-800",
@@ -40,6 +41,7 @@ const variantStyles = {
   // Custom Variants
   active: "bg-[#0B6936] text-white",
   trivant: "", // Handled with inline style for gradient
+  included: "bg-[#E0F5FE] text-[#0277BD]",
 };
 
 const Badge: React.FC<IBadgeProps> = ({
