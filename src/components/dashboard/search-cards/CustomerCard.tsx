@@ -101,7 +101,7 @@ export default function CustomerCard({ item, onClick }: Props) {
                         e.stopPropagation();
                         handleClick();
                     }}
-                    className="text-gray-400 hover:text-orange-600 transition-colors flex-shrink-0 pr-4"
+                    className="text-gray-400 hover:text-orange-600 transition-colors shrink-0 pr-4"
                     aria-label="View customer"
                 >
                     <img src={arrowIcon} alt="View" className="w-3 h-3" />

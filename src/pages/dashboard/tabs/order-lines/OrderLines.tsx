@@ -6,9 +6,9 @@ import SaveFiltersModal from "@/components/dashboard/modals/SaveFiltersModal";
 import PreferencesModal from "@/components/dashboard/modals/PreferencesModal";
 import type { FilterField } from "@/components/dashboard/modals/FiltersModal";
 import SavedSearches from "@/components/dashboard/table/SavedSearches";
-import OrdersTable from "@/components/dashboard/table/OrdersTable";
+import OrderLinesTable from "@/components/dashboard/table/OrderLinesTable";
 
-const AllOrders = () => {
+const OrderLines = () => {
     const [filterOpen, setFilterOpen] = useState(false);
     const [saveFiltersOpen, setSaveFiltersOpen] = useState(false);
     const [preferencesOpen, setPreferencesOpen] = useState(false);
@@ -156,8 +156,25 @@ const AllOrders = () => {
 
     return (
         <div className="space-y-4">
+            <SearchBar
+                placeholder="Search"
+                value={searchValue}
+                onChange={setSearchValue}
+                onFilter={() => setFilterOpen(true)}
+                onSettings={() => setPreferencesOpen(true)}
+                showRefresh
+                showFilter
+                showSettings
+                showExport
+                filtersApplied={filtersApplied}
+                onClearSearch={handleClearSearch}
+                onSaveSearch={handleSaveSearch}
+                onDeleteSearch={handleDeleteSearch}
+                onExport={() => setExportOpen(true)}
+            />
+
             <SavedSearches
-                title="All Orders"
+                title="Order Lines"
                 savedSearches={[
                     "Saved Search 1",
                     "Saved Search 2",
@@ -176,24 +193,6 @@ const AllOrders = () => {
                     "Saved Search 15",
                 ]}
             />
-
-            <SearchBar
-                placeholder="Search orders"
-                value={searchValue}
-                onChange={setSearchValue}
-                onFilter={() => setFilterOpen(true)}
-                onSettings={() => setPreferencesOpen(true)}
-                showRefresh
-                showFilter
-                showSettings
-                showExport
-                filtersApplied={filtersApplied}
-                onClearSearch={handleClearSearch}
-                onSaveSearch={handleSaveSearch}
-                onDeleteSearch={handleDeleteSearch}
-                onExport={() => setExportOpen(true)}
-            />
-
             <FiltersModal
                 open={filterOpen}
                 onClose={() => setFilterOpen(false)}
@@ -226,9 +225,9 @@ const AllOrders = () => {
                 onApply={handlePreferencesApply}
             />
 
-            <OrdersTable />
+            <OrderLinesTable />
         </div>
     );
 };
 
-export default AllOrders;
+export default OrderLines;
