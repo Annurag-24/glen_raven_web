@@ -6,9 +6,9 @@ import SaveFiltersModal from "@/components/dashboard/modals/SaveFiltersModal";
 import PreferencesModal from "@/components/dashboard/modals/PreferencesModal";
 import type { FilterField } from "@/components/dashboard/modals/FiltersModal";
 import SavedSearches from "@/components/dashboard/table/SavedSearches";
-import OrdersTable from "@/components/dashboard/table/OrdersTable";
+import CustomersTable from "@/components/dashboard/table/CustomersTable";
 
-const AllOrders = () => {
+const AllCustomers = () => {
   const [filterOpen, setFilterOpen] = useState(false);
   const [saveFiltersOpen, setSaveFiltersOpen] = useState(false);
   const [preferencesOpen, setPreferencesOpen] = useState(false);
@@ -172,7 +172,7 @@ const AllOrders = () => {
       />
 
       <SavedSearches
-        title="All Orders"
+        title="All Customers"
         savedSearches={[
           "Saved Search 1",
           "Saved Search 2",
@@ -223,9 +223,9 @@ const AllOrders = () => {
         onApply={handlePreferencesApply}
       />
 
-      <OrdersTable />
+      <CustomersTable />
     </div>
   );
 };
 
-export default AllOrders;
+export default AllCustomers;
