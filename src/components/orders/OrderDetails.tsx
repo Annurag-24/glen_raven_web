@@ -17,7 +17,7 @@ export default function OrderDetails({
     className,
 }: OrderDetailsProps) {
     return (
-        <div className={`bg-white rounded-lg p-4 ${className || ""}`}>
+        <div className={`bg-white rounded-sm p-4  border border-[#F4F4F5]  ${className || ""}`}>
             <div className="flex items-center gap-2 mb-3">
                 <div className="w-8 h-8 rounded-full bg-purple-50 flex items-center justify-center">
                     <Grid className="w-4 h-4 text-purple-600" />

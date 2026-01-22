@@ -132,7 +132,7 @@ function Stepper({
                 role="tablist"
                 aria-orientation={orientation}
                 data-slot="stepper"
-                className={cn('w-full ', className)}
+                className={cn('w-[85%] mx-auto ', className)}
                 data-orientation={orientation}
                 {...props}
             >

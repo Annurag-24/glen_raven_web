@@ -3,7 +3,6 @@ import OrderProgressBar from "./OrderProgressBar";
 import QuickTasks from "@/components/orders/QuickTasks";
 import OrderDetails from "@/components/orders/OrderDetails";
 import OrderSummary from "@/components/orders/OrderSummary";
-import DeliverAddress from "./DeliverAddress";
 import OrderHeader from "./orderHeader";
 import DeliverIcon from "@/assets/icons/delivery.svg";
 import OrderTabs, { type TabItem } from "@/components/orders/OrderTabs";
@@ -12,7 +11,6 @@ import { type LineItemData } from "@/components/orders/LineItem";
 
 const OrderTracking = () => {
     const [activeTab, setActiveTab] = useState<string>("line-items");
-
     // Example data - replace with actual data from API/state
     const orderData = {
         customerName: "Anya Sharma",
@@ -20,11 +18,13 @@ const OrderTracking = () => {
             { label: "Trivantage +", variant: "trivant" as const },
             { label: "Active", variant: "active" as const },
         ],
-        poNumber: "#315156465",
         paymentTerms: "Net 30",
         orderNumber: "4445636",
+        poNumber: "#315156465",
         orderStatus: "confirmed",
         orderDate: new Date("2024-05-28T10:30:00"),
+
+
 
         changeContact: [
             { label: "View Contact", value: "view", onClick: () => console.log("View contact") },
@@ -66,14 +66,14 @@ const OrderTracking = () => {
             label: "Confirmed",
             date: "Expected by, 12th Dec",
             completedBy: "John Doe",
-            isCompleted: true,
-            isCurrent: false,
+            isCompleted: false,
+            isCurrent: true,
         },
         {
             id: "shipped",
             label: "Shipped",
             isCompleted: false,
-            isCurrent: true,
+            isCurrent: false,
         },
         {
             id: "delivered",
@@ -158,31 +158,32 @@ const OrderTracking = () => {
     ];
 
     return (
-        <div className="w-full bg-[#F9FAFB] min-h-screen">
+        <div className="w-full  min-h-screen">
             {/* Header Section */}
-            <OrderHeader
-                customerName={orderData.customerName}
-                customerTags={orderData.customerTags}
-                poNumber={orderData.poNumber}
-                paymentTerms={orderData.paymentTerms}
-                contactDetails={orderData.contactDetails}
-                customerNotes={orderData.customerNotes}
-                orderNumber={orderData.orderNumber}
-                orderStatus={orderData.orderStatus as any}
-                orderDate={orderData.orderDate}
-                orderNotes={orderData.orderNotes}
-            />
+            <div className="">
+                <OrderHeader
+                    customerName={orderData.customerName}
+                    customerTags={orderData.customerTags}
+                    poNumber={orderData.poNumber}
+                    paymentTerms={orderData.paymentTerms}
+                    contactDetails={orderData.contactDetails}
+                    customerNotes={orderData.customerNotes}
+                    orderNumber={orderData.orderNumber}
+                    orderStatus={orderData.orderStatus as any}
+                    orderDate={orderData.orderDate}
+                    orderNotes={orderData.orderNotes}
+                />
+            </div>
             {/* Main Content Grid - Left content and Right sidebar */}
-            <div className="grid grid-cols-1 lg:grid-cols-[1fr_320px] gap-6 px-6 py-6">
+            <div className="grid grid-cols-1 lg:grid-cols-[1fr_320px]   ">
                 {/* Left Side - Stepper and Main Content */}
-                <div className="space-y-6">
+                <div className="space-y-6 border-r border-[#A4A4A429]">
                     {/* Stepper Component */}
-                    <div className="border-b border-[#A4A4A429] pb-[15px] ">
+                    <div className="border-b border-[#A4A4A429] py-[15px] mb-0  bg-[#FFFFFF] ">
+
                         <OrderProgressBar steps={progressSteps} />
                     </div>
 
-                    {/* Deliver To Section */}
-                    <DeliverAddress address={DeliveryAddress} />
 
                     {/* Tabs Section */}
                     <OrderTabs
@@ -193,7 +194,7 @@ const OrderTracking = () => {
                 </div>
 
                 {/* Right Side - Sidebar */}
-                <div className="space-y-6">
+                <div className="space-y-6 p-[20px] bg-[#FFFFFF]">
                     <QuickTasks
                         tasks={[
                             { label: "Print Order", onClick: () => console.log("Print Order") },

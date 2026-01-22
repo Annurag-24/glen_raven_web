@@ -1,5 +1,5 @@
 import Badge from "@/components/Badge";
-import PencilIcon from "@/assets/icons/pencil.svg";
+import PencilIcon from "@/assets/icons/orderpencil.svg";
 import { cn } from "@/lib/utils";
 
 export type LineItemData = {
@@ -35,7 +35,7 @@ export default function LineItem({ item }: LineItemProps) {
     const status = stockStatusConfig[item.stockStatus];
 
     return (
-        <div className={cn("bg-white rounded-lg p-4 border border-gray-200", item.className)}>
+        <div className={cn(" rounded-lg p-4 border border-[#E4E4E7] bg-[#FFFFFF]", item.className)}>
             <div className="flex gap-4">
                 {/* Thumbnail */}
                 <div className="shrink-0 w-20 h-20 rounded-lg overflow-hidden bg-gray-100">
@@ -84,7 +84,7 @@ export default function LineItem({ item }: LineItemProps) {
                     </div>
 
                     {/* Allocation & Charges */}
-                    <div className="flex items-center gap-4 text-xs text-gray-600 mb-3">
+                    <div className="flex items-center gap-4 text-xs text-[#71717A] mb-3">
                         <span>Allocation</span>
                         <span>Charges</span>
                     </div>

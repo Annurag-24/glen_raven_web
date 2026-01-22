@@ -21,7 +21,7 @@ export default function QuickTasks({
     className,
 }: QuickTasksProps) {
     return (
-        <div className={`bg-white rounded-lg p-4 ${className || ""}`}>
+        <div className={`bg-white rounded-sm p-4 border border-[#F4F4F5] ${className || ""}`}>
             <div className="flex items-center gap-2 mb-2">
                 <div className="w-8 h-8 rounded-full bg-blue-50 flex items-center justify-center">
                     <List className="w-4 h-4 text-blue-600" />

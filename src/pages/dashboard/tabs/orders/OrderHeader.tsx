@@ -71,11 +71,11 @@ export default function OrderHeader({
     return (
         <div
             className={cn(
-                "w-full  border-b border-[#A4A4A429]   px-6 py-4",
+                "w-full  border-b border-[#A4A4A429]   px-6 py-[18px] bg-[#FFFFFF]",
                 className
             )}
         >
-            <div className="flex items-start justify-between gap-6">
+            <div className="flex items-center justify-between gap-6 ">
                 {/* Left Side - Customer Info */}
                 <div className="flex-1 flex items-start gap-4">
                     {/* Profile Icon */}
@@ -160,9 +160,7 @@ export default function OrderHeader({
                                     Order #{orderNumber}
                                 </span>
                             </div>
-                            <div className="bg-[#B75E001A] rounded-full w-[60px] h-[60px] flex justify-center items-center">
-                                <ShoppingCart className="w-5 h-5" color="#B75E00" />
-                            </div>
+
                         </div>
 
                         {/* Date and Actions */}
@@ -178,6 +176,9 @@ export default function OrderHeader({
                             <span className="text-[14px] text-[#71717A]">{formattedDate}</span>
 
                         </div>
+                    </div>
+                    <div className="bg-[#B75E001A] rounded-full w-[60px] h-[60px] flex justify-center items-center">
+                        <ShoppingCart className="w-5 h-5" color="#B75E00" />
                     </div>
                 </div>
             </div>
