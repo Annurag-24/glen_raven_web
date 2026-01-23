@@ -1,25 +1,25 @@
-import DashboardCard from "@/components/dashboard/DashboardCard";
+import DashboardCard from '@/components/dashboard/DashboardCard';
 
 const errors = [
   {
-    code: "E502: NAV Sync Failure",
-    system: "OMS System",
-    reference: "Order #84521",
-    severity: "error",
-    action: "Retry",
+    code: 'E502: NAV Sync Failure',
+    system: 'OMS System',
+    reference: 'Order #84521',
+    severity: 'error',
+    action: 'Retry',
   },
   {
-    code: "E401: Payment Auth Failed",
-    system: "CyberSource",
-    reference: "Order #84519",
-    severity: "error",
+    code: 'E401: Payment Auth Failed',
+    system: 'CyberSource',
+    reference: 'Order #84519',
+    severity: 'error',
     action: null,
   },
   {
-    code: "W211: Duplicate Receipt",
-    system: "WMS Sync",
-    reference: "ASN #77204",
-    severity: "warning",
+    code: 'W211: Duplicate Receipt',
+    system: 'WMS Sync',
+    reference: 'ASN #77204',
+    severity: 'warning',
     action: null,
   },
 ];
@@ -59,9 +59,7 @@ const ErrorCenterAndExceptionQueueCard = () => {
                   <div className="flex flex-col">
                     <span
                       className={`text-sm font-medium font-['Inter'] leading-5 ${
-                        error.severity === "error"
-                          ? "text-red-600"
-                          : "text-yellow-600"
+                        error.severity === 'error' ? 'text-red-600' : 'text-yellow-600'
                       }`}
                     >
                       {error.code}

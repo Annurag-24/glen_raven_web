@@ -1,7 +1,5 @@
-import { cn } from "@/lib/utils";
-import DashboardCard, {
-  CardPrimaryText,
-} from "@/components/dashboard/DashboardCard";
+import { cn } from '@/lib/utils';
+import DashboardCard, { CardPrimaryText } from '@/components/dashboard/DashboardCard';
 
 interface IStatCardProps {
   label: string;
@@ -21,17 +19,13 @@ const StatCard: React.FC<IStatCardProps> = ({
   return (
     <div
       className={cn(
-        "rounded-lg border border-gray-200 p-4",
-        fullWidth && "md:col-span-2",
+        'rounded-lg border border-gray-200 p-4',
+        fullWidth && 'md:col-span-2',
         className
       )}
     >
       <CardPrimaryText className="mb-2 text-sm">{label}</CardPrimaryText>
-      <p
-        className={cn("text-2xl font-bold", valueClassName || "text-gray-900")}
-      >
-        {value}
-      </p>
+      <p className={cn('text-2xl font-bold', valueClassName || 'text-gray-900')}>{value}</p>
     </div>
   );
 };
@@ -44,11 +38,7 @@ const UserAccessSummaryCard = () => {
           <StatCard label="Total Active Users" value="1,423" />
           <StatCard label="Inactive / Disabled" value="88" />
           <StatCard label="Roles Count" value="56" />
-          <StatCard
-            label="Users Pending Approval"
-            value="12"
-            valueClassName="text-yellow-600"
-          />
+          <StatCard label="Users Pending Approval" value="12" valueClassName="text-yellow-600" />
           <StatCard label="Recently Modified Roles" value="3" fullWidth />
         </div>
       </DashboardCard>

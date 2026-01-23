@@ -1,5 +1,5 @@
-import DashboardCard from "@/components/dashboard/DashboardCard";
-import { cn } from "@/lib/utils";
+import DashboardCard from '@/components/dashboard/DashboardCard';
+import { cn } from '@/lib/utils';
 
 interface IPriceRowProps {
   label: string;
@@ -11,17 +11,13 @@ interface IPriceRowProps {
 const PriceRow: React.FC<IPriceRowProps> = ({
   label,
   value,
-  labelClassName = "text-slate-500",
-  valueClassName = "text-slate-800",
+  labelClassName = 'text-slate-500',
+  valueClassName = 'text-slate-800',
 }) => {
   return (
     <div className="flex justify-between items-center">
-      <span className={cn(["text-sm font-medium", labelClassName])}>
-        {label}
-      </span>
-      <span className={cn(["text-sm font-medium", valueClassName])}>
-        {value}
-      </span>
+      <span className={cn(['text-sm font-medium', labelClassName])}>{label}</span>
+      <span className={cn(['text-sm font-medium', valueClassName])}>{value}</span>
     </div>
   );
 };
@@ -41,11 +37,7 @@ const PricingAndMarginInsideCard = () => {
           <div className="flex flex-col gap-3">
             <PriceRow label="Base Price:" value="$2,499.00" />
             <PriceRow label="Contract Price:" value="$2,199.00" />
-            <PriceRow
-              label="Applied Discounts:"
-              value="- $150.00"
-              valueClassName="text-red-600"
-            />
+            <PriceRow label="Applied Discounts:" value="- $150.00" valueClassName="text-red-600" />
           </div>
 
           {/* Divider */}

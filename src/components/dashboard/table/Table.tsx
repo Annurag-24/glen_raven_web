@@ -4,8 +4,8 @@ import {
   type CellClickedEvent,
   type ColDef,
   type RowClickedEvent,
-} from "ag-grid-community";
-import { AgGridReact } from "ag-grid-react";
+} from 'ag-grid-community';
+import { AgGridReact } from 'ag-grid-react';
 
 // Register all Community features
 ModuleRegistry.registerModules([AllCommunityModule]);
@@ -17,12 +17,7 @@ interface TableProps {
   onCellClicked?: (event: CellClickedEvent) => void;
 }
 
-const Table: React.FC<TableProps> = ({
-  rowData,
-  columnDefs,
-  onRowClicked,
-  onCellClicked,
-}) => {
+const Table: React.FC<TableProps> = ({ rowData, columnDefs, onRowClicked, onCellClicked }) => {
   return (
     <div className="ag-theme-alpine w-full">
       <AgGridReact

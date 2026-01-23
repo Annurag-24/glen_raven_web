@@ -1,6 +1,6 @@
-import { cn } from "@/lib/utils";
-import { useState } from "react";
-import ChevronDownIcon from "@/assets/icons/chevron-down.svg";
+import { cn } from '@/lib/utils';
+import { useState } from 'react';
+import ChevronDownIcon from '@/assets/icons/chevron-down.svg';
 
 interface IRightSideDrawerProps {
   isOpen: boolean;
@@ -23,11 +23,7 @@ interface IRightSideDrawerAccordionItem {
   valueClassName?: string;
 }
 
-const RightSideDrawer: React.FC<IRightSideDrawerProps> = ({
-  isOpen,
-  onClose,
-  children,
-}) => {
+const RightSideDrawer: React.FC<IRightSideDrawerProps> = ({ isOpen, onClose, children }) => {
   if (!isOpen) return null;
 
   return (
@@ -50,35 +46,30 @@ export const RightSideDrawerAccordion: React.FC<IRightSideDrawerAccordion> = ({
   title,
   children,
   isInitiallyOpen = false,
-  openBg = "bg-white",
-  closedBg = "bg-gray-50",
+  openBg = 'bg-white',
+  closedBg = 'bg-gray-50',
 }) => {
   const [isOpen, setIsOpen] = useState<boolean>(isInitiallyOpen);
 
   return (
     <div
       className={cn([
-        "p-4 rounded-md outline-1 -outline-offset-1 outline-gray-100",
+        'p-4 rounded-md outline-1 -outline-offset-1 outline-gray-100',
         isOpen ? openBg : closedBg,
       ])}
     >
       <div
         className={cn([
-          "w-full flex justify-between items-center cursor-pointer",
-          isOpen && "border-b border-gray-200 pb-3 mb-3",
+          'w-full flex justify-between items-center cursor-pointer',
+          isOpen && 'border-b border-gray-200 pb-3 mb-3',
         ])}
         onClick={() => setIsOpen(!isOpen)}
       >
-        <div className="text-gray-700 text-sm font-semibold leading-3">
-          {title}
-        </div>
+        <div className="text-gray-700 text-sm font-semibold leading-3">{title}</div>
         <img
           src={ChevronDownIcon}
           alt="Chevron Down"
-          className={cn([
-            "w-3.5 h-3.5 transition-transform",
-            isOpen && "rotate-180",
-          ])}
+          className={cn(['w-3.5 h-3.5 transition-transform', isOpen && 'rotate-180'])}
         />
       </div>
 
@@ -87,14 +78,17 @@ export const RightSideDrawerAccordion: React.FC<IRightSideDrawerAccordion> = ({
   );
 };
 
-export const RightSideDrawerAccordionItem: React.FC<
-  IRightSideDrawerAccordionItem
-> = ({ label, value, labelClassName, valueClassName }) => {
+export const RightSideDrawerAccordionItem: React.FC<IRightSideDrawerAccordionItem> = ({
+  label,
+  value,
+  labelClassName,
+  valueClassName,
+}) => {
   return (
     <div className="w-full flex justify-between items-start gap-4">
       <span
         className={cn([
-          "text-gray-500 text-sm font-normal w-24 shrink-0",
+          'text-gray-500 text-sm font-normal w-24 shrink-0',
           labelClassName && labelClassName,
         ])}
       >
@@ -102,7 +96,7 @@ export const RightSideDrawerAccordionItem: React.FC<
       </span>
       <span
         className={cn([
-          "text-gray-700 text-sm font-semibold text-right",
+          'text-gray-700 text-sm font-semibold text-right',
           valueClassName && valueClassName,
         ])}
       >
@@ -123,7 +117,7 @@ export const RightSideDrawerCard: React.FC<{
       <div className="w-full py-1.5 flex items-center gap-3">
         <div
           className={cn([
-            "w-10 h-10 flex items-center justify-center overflow-hidden rounded-full",
+            'w-10 h-10 flex items-center justify-center overflow-hidden rounded-full',
             iconBgColor && iconBgColor,
           ])}
         >
@@ -131,9 +125,7 @@ export const RightSideDrawerCard: React.FC<{
         </div>
         <div className="flex-1 flex flex-col">
           <div className="w-full pb-0.5 flex">
-            <div className="flex-1 text-gray-600 text-md font-semibold leading-5">
-              {title}
-            </div>
+            <div className="flex-1 text-gray-600 text-md font-semibold leading-5">{title}</div>
           </div>
         </div>
       </div>
@@ -148,12 +140,7 @@ export const RightSideDrawerCardLabel: React.FC<{
   className?: string;
 }> = ({ children, className }) => {
   return (
-    <p
-      className={cn([
-        "text-gray-500 text-sm font-normal leading-4",
-        className && className,
-      ])}
-    >
+    <p className={cn(['text-gray-500 text-sm font-normal leading-4', className && className])}>
       {children}
     </p>
   );
@@ -164,12 +151,7 @@ export const RightSideDrawerCardValue: React.FC<{
   className?: string;
 }> = ({ children, className }) => {
   return (
-    <p
-      className={cn([
-        "text-gray-600 text-sm font-semibold leading-5",
-        className && className,
-      ])}
-    >
+    <p className={cn(['text-gray-600 text-sm font-semibold leading-5', className && className])}>
       {children}
     </p>
   );

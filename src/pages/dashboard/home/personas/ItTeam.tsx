@@ -4,7 +4,7 @@ import {
   JobExecutionSummaryCard,
   RecentAuditActivityCard,
   ErrorCenterAndExceptionQueueCard,
-} from "@/components/dashboard/personas/it-team";
+} from '@/components/dashboard/personas/it-team';
 
 const ItTeamPersona = () => {
   return (

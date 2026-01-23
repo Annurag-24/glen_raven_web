@@ -1,19 +1,19 @@
-import DashboardCard from "@/components/dashboard/DashboardCard";
+import DashboardCard from '@/components/dashboard/DashboardCard';
 
 interface IInfoRowProps {
   label: string;
   value: string;
   valueClassName?: string;
-  layout?: "inline" | "stacked";
+  layout?: 'inline' | 'stacked';
 }
 
 const InfoRow: React.FC<IInfoRowProps> = ({
   label,
   value,
-  valueClassName = "text-slate-700",
-  layout = "stacked",
+  valueClassName = 'text-slate-700',
+  layout = 'stacked',
 }) => {
-  if (layout === "inline") {
+  if (layout === 'inline') {
     return (
       <div className="text-sm">
         <span className="text-slate-800 font-semibold">{label} </span>
@@ -51,16 +51,8 @@ const CustomerSnapshotCard = () => {
 
           {/* Credit Details */}
           <div className="flex flex-col gap-3">
-            <InfoRow
-              label="Credit Limit:"
-              value="$50,000.00"
-              valueClassName="text-slate-800"
-            />
-            <InfoRow
-              label="Available Credit:"
-              value="$32,500.00"
-              valueClassName="text-green-600"
-            />
+            <InfoRow label="Credit Limit:" value="$50,000.00" valueClassName="text-slate-800" />
+            <InfoRow label="Available Credit:" value="$32,500.00" valueClassName="text-green-600" />
 
             {/* Credit Usage Progress Bar */}
             <div className="w-full h-2.5 bg-slate-200 rounded-full overflow-hidden">
@@ -73,21 +65,9 @@ const CustomerSnapshotCard = () => {
 
           {/* Order & Quote History */}
           <div className="flex flex-col gap-2">
-            <InfoRow
-              label="Last 5 Orders:"
-              value="ORD-991, ORD-985, ..."
-              layout="inline"
-            />
-            <InfoRow
-              label="Last 5 Quotes:"
-              value="Q-882335, Q-87110, ..."
-              layout="inline"
-            />
-            <InfoRow
-              label="Average Order Size:"
-              value="$7,820.00"
-              layout="inline"
-            />
+            <InfoRow label="Last 5 Orders:" value="ORD-991, ORD-985, ..." layout="inline" />
+            <InfoRow label="Last 5 Quotes:" value="Q-882335, Q-87110, ..." layout="inline" />
+            <InfoRow label="Average Order Size:" value="$7,820.00" layout="inline" />
           </div>
         </div>
       </DashboardCard>

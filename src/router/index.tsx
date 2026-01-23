@@ -1,24 +1,24 @@
-import { lazy } from "react";
-import { createBrowserRouter, Navigate } from "react-router";
+import { lazy } from 'react';
+import { createBrowserRouter, Navigate } from 'react-router';
 
 // lazy route
-import LazyRoute from "@/components/LazyRoute";
+import LazyRoute from '@/components/LazyRoute';
 
 // layouts
-import AuthLayout from "@/layouts/auth";
-import DashboardLayout from "@/layouts/dashboard";
+import AuthLayout from '@/layouts/auth';
+import DashboardLayout from '@/layouts/dashboard';
 
 // error boundary
-import ErrorBoundary from "@/components/ErrorBoundary";
+import ErrorBoundary from '@/components/ErrorBoundary';
 
 // lazy loaded pages
-const Home = lazy(() => import("@/pages/dashboard/home"));
-const Login = lazy(() => import("@/pages/auth/login"));
-const PageNotFound = lazy(() => import("@/pages/page-not-found"));
+const Home = lazy(() => import('@/pages/dashboard/home'));
+const Login = lazy(() => import('@/pages/auth/login'));
+const PageNotFound = lazy(() => import('@/pages/page-not-found'));
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: '/',
     element: <DashboardLayout />,
     errorElement: <ErrorBoundary />,
     children: [
@@ -30,7 +30,7 @@ const router = createBrowserRouter([
     ],
   },
   {
-    path: "/auth",
+    path: '/auth',
     element: <AuthLayout />,
     errorElement: <ErrorBoundary />,
     children: [
@@ -39,14 +39,14 @@ const router = createBrowserRouter([
         element: <Navigate to="/auth/login" replace />,
       },
       {
-        path: "login",
+        path: 'login',
         element: <LazyRoute component={Login} />,
       },
       // add more auth routes (register, forgot-password, etc.)
     ],
   },
   {
-    path: "*",
+    path: '*',
     element: <LazyRoute component={PageNotFound} />,
   },
 ]);

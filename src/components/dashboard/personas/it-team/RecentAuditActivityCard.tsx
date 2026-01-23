@@ -1,31 +1,31 @@
 import DashboardCard, {
   CardPrimaryText,
   CardSecondaryText,
-} from "@/components/dashboard/DashboardCard";
-import PencilIcon from "@/assets/icons/pencil.svg";
-import LogoutIcon from "@/assets/icons/logout.svg";
-import LoginIcon from "@/assets/icons/login.svg";
+} from '@/components/dashboard/DashboardCard';
+import PencilIcon from '@/assets/icons/pencil.svg';
+import LogoutIcon from '@/assets/icons/logout.svg';
+import LoginIcon from '@/assets/icons/login.svg';
 
 const activities = [
   {
-    user: "j.smith",
-    action: "modified Role",
+    user: 'j.smith',
+    action: 'modified Role',
     detail: '"Store Manager"',
-    time: "3 minutes ago from 192.168.1.1",
+    time: '3 minutes ago from 192.168.1.1',
     icon: PencilIcon,
   },
   {
-    user: "admin",
-    action: "logged out",
-    detail: "",
-    time: "1 hour ago from 208.113.83.42",
+    user: 'admin',
+    action: 'logged out',
+    detail: '',
+    time: '1 hour ago from 208.113.83.42',
     icon: LogoutIcon,
   },
   {
-    user: "s.jones",
-    action: "logged in",
-    detail: "",
-    time: "2 hours ago from 104.18.21.199",
+    user: 's.jones',
+    action: 'logged in',
+    detail: '',
+    time: '2 hours ago from 104.18.21.199',
     icon: LoginIcon,
   },
 ];
@@ -56,8 +56,7 @@ const RecentAuditActivityCard = () => {
               {/* Content */}
               <div className="flex-1 flex flex-col gap-1">
                 <CardPrimaryText>
-                  {activity.user} {activity.action}{" "}
-                  {activity.detail && activity.detail}
+                  {activity.user} {activity.action} {activity.detail && activity.detail}
                 </CardPrimaryText>
                 <CardSecondaryText>{activity.time}</CardSecondaryText>
               </div>

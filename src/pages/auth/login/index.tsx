@@ -1,15 +1,15 @@
-import React, { useState } from "react";
-import { Button } from "@/components/ui/button";
-import mailIcon from "@/assets/icons/mail.svg";
-import passIcon from "@/assets/icons/password.svg";
-import unlockIcon from "@/assets/icons/password-unlock.svg";
-import loginBg from "@/assets/login-bg.svg";
-import logo from "@/assets/logo.png";
-import { Check } from "lucide-react";
+import React, { useState } from 'react';
+import { Button } from '@/components/ui/button';
+import mailIcon from '@/assets/icons/mail.svg';
+import passIcon from '@/assets/icons/password.svg';
+import unlockIcon from '@/assets/icons/password-unlock.svg';
+import loginBg from '@/assets/login-bg.svg';
+import logo from '@/assets/logo.png';
+import { Check } from 'lucide-react';
 
 const Login = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [agree, setAgree] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
 
@@ -74,7 +74,7 @@ const Login = () => {
                 </label>
                 <div className="relative">
                   <input
-                    type={showPassword ? "text" : "password"}
+                    type={showPassword ? 'text' : 'password'}
                     placeholder="*************"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
@@ -114,9 +114,7 @@ const Login = () => {
                     checked={agree}
                     onChange={(e) => setAgree(e.target.checked)}
                     className={`h-5 w-5 appearance-none align-middle border rounded ${
-                      agree
-                        ? "bg-[#036fed] border-[#036fed]"
-                        : "bg-white border-[#E0E0E0]"
+                      agree ? 'bg-[#036fed] border-[#036fed]' : 'bg-white border-[#E0E0E0]'
                     }`}
                   />
                   {agree && (
@@ -129,11 +127,11 @@ const Login = () => {
                   htmlFor="agree"
                   className="font-normal text-[14px] leading-7 font-sans text-[#1A1A1A]"
                 >
-                  I agree the{" "}
+                  I agree the{' '}
                   <a className="text-tertiary cursor-pointer hover:text-tertiary/80 transition-colors">
                     Terms of Service
-                  </a>{" "}
-                  and{" "}
+                  </a>{' '}
+                  and{' '}
                   <a className="text-tertiary cursor-pointer hover:text-tertiary/80 transition-colors">
                     Privacy Policy
                   </a>

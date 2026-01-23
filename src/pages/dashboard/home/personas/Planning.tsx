@@ -3,7 +3,7 @@ import {
   OpenPurchaseOrdersCard,
   AllocationOverviewCard,
   InboundReceiptExceptionsCard,
-} from "@/components/dashboard/personas/planning";
+} from '@/components/dashboard/personas/planning';
 
 const PlanningPersona = () => {
   return (

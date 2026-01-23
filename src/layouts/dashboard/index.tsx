@@ -1,8 +1,8 @@
-import { useState } from "react";
-import { Outlet } from "react-router";
-import Header from "@/layouts/dashboard/Header";
-import LeftSidebar from "@/layouts/dashboard/LeftSidebar";
-import TabBar, { type ITab } from "@/layouts/dashboard/TabBar";
+import { useState } from 'react';
+import { Outlet } from 'react-router';
+import Header from '@/layouts/dashboard/Header';
+import LeftSidebar from '@/layouts/dashboard/LeftSidebar';
+import TabBar, { type ITab } from '@/layouts/dashboard/TabBar';
 
 const DashboardLayout = () => {
   const [tabs, setTabs] = useState<ITab[]>([]);
@@ -29,8 +29,7 @@ const DashboardLayout = () => {
     // If closing active tab, switch to another tab or home
     if (activeTabId === tabId) {
       if (tabs.length > 1) {
-        const newActiveTab =
-          tabIndex > 0 ? tabs[tabIndex - 1] : tabs[tabIndex + 1];
+        const newActiveTab = tabIndex > 0 ? tabs[tabIndex - 1] : tabs[tabIndex + 1];
         setActiveTabId(newActiveTab.id);
       } else {
         setActiveTabId(null);
@@ -49,11 +48,7 @@ const DashboardLayout = () => {
 
       <div className="flex flex-1 overflow-hidden">
         <div className="overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
-          <LeftSidebar
-            addTab={addTab}
-            activeTabId={activeTabId}
-            goToHome={goToHome}
-          />
+          <LeftSidebar addTab={addTab} activeTabId={activeTabId} goToHome={goToHome} />
         </div>
 
         <div className="flex-1 flex flex-col overflow-hidden">

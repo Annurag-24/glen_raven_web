@@ -6,22 +6,22 @@ import DashboardCard, {
   CardTableRow,
   CardTableCellPrimary,
   CardTableCell,
-} from "@/components/dashboard/DashboardCard";
-import Badge from "@/components/Badge";
+} from '@/components/dashboard/DashboardCard';
+import Badge from '@/components/Badge';
 
 const data = [
-  { po: "PO-987115", ordered: 500, received: 498, issue: "Shortage" },
-  { po: "PO-987118", ordered: 1000, received: 1000, issue: "ASN Mismatch" },
-  { po: "PO-987120", ordered: 250, received: 255, issue: "Overage" },
-  { po: "PO-987121", ordered: 250, received: 255, issue: "Overage" },
+  { po: 'PO-987115', ordered: 500, received: 498, issue: 'Shortage' },
+  { po: 'PO-987118', ordered: 1000, received: 1000, issue: 'ASN Mismatch' },
+  { po: 'PO-987120', ordered: 250, received: 255, issue: 'Overage' },
+  { po: 'PO-987121', ordered: 250, received: 255, issue: 'Overage' },
 ];
 
 const mapIssueToVariant = (issue: string) => {
   const key = issue.toLowerCase();
-  if (key.includes("shortage")) return "error" as const;
-  if (key.includes("asn")) return "peach" as const;
-  if (key.includes("overage")) return "warning" as const;
-  return "default" as const;
+  if (key.includes('shortage')) return 'error' as const;
+  if (key.includes('asn')) return 'peach' as const;
+  if (key.includes('overage')) return 'warning' as const;
+  return 'default' as const;
 };
 
 export default function InboundReceiptExceptionsCard() {
@@ -31,7 +31,7 @@ export default function InboundReceiptExceptionsCard() {
       showViewAll={false}
       wrapperClassName="w-full"
       showBottomViewAll={true}
-      bottomViewAllLabel={"View All Exceptions"}
+      bottomViewAllLabel={'View All Exceptions'}
       bottomViewAllLink="#"
     >
       <CardTable>
@@ -49,10 +49,7 @@ export default function InboundReceiptExceptionsCard() {
               <CardTableCell>{row.ordered}</CardTableCell>
               <CardTableCell>{row.received}</CardTableCell>
               <CardTableCell>
-                <Badge
-                  title={row.issue}
-                  variant={mapIssueToVariant(row.issue)}
-                />
+                <Badge title={row.issue} variant={mapIssueToVariant(row.issue)} />
               </CardTableCell>
             </CardTableRow>
           ))}

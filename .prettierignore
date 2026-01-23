@@ -1,0 +1,18 @@
+# Dependencies
+node_modules
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Build outputs
+dist
+build
+coverage
+
+# Generated files
+*.min.js
+*.min.css
+
+# Other
+.DS_Store
+*.log

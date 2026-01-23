@@ -1,63 +1,58 @@
 import DashboardCard, {
   CardPrimaryText,
   CardSecondaryText,
-} from "@/components/dashboard/DashboardCard";
-import { cn } from "@/lib/utils";
-import Badge, { type BadgeVariant } from "@/components/Badge";
+} from '@/components/dashboard/DashboardCard';
+import { cn } from '@/lib/utils';
+import Badge, { type BadgeVariant } from '@/components/Badge';
 
 const data = [
   {
-    poNumber: "PO-008765",
-    businessName: "ACME Corp",
+    poNumber: 'PO-008765',
+    businessName: 'ACME Corp',
     receivedQuantity: 500,
     totalQuantity: 1000,
-    status: "Partially Received",
+    status: 'Partially Received',
   },
   {
-    poNumber: "PO-008764",
-    businessName: "Global Tech",
+    poNumber: 'PO-008764',
+    businessName: 'Global Tech',
     receivedQuantity: 0,
     totalQuantity: 250,
-    status: "Receipt Started",
+    status: 'Receipt Started',
   },
   {
-    poNumber: "PO-008763",
-    businessName: "Supply Inc.",
+    poNumber: 'PO-008763',
+    businessName: 'Supply Inc.',
     receivedQuantity: 1500,
     totalQuantity: 1500,
-    status: "Received",
+    status: 'Received',
   },
 ];
 
 const getStatusVariant = (status: string): BadgeVariant => {
   switch (status) {
-    case "Partially Received":
-      return "warning";
-    case "Receipt Started":
-      return "error";
-    case "Received":
-      return "success";
+    case 'Partially Received':
+      return 'warning';
+    case 'Receipt Started':
+      return 'error';
+    case 'Received':
+      return 'success';
     default:
-      return "default";
+      return 'default';
   }
 };
 
 const PosAwaitingReceiptCard = () => {
   return (
     <>
-      <DashboardCard
-        title="POs Awaiting Receipt / Validation"
-        showViewAll={true}
-        viewAllLink="#"
-      >
+      <DashboardCard title="POs Awaiting Receipt / Validation" showViewAll={true} viewAllLink="#">
         <div className="self-stretch flex flex-col justify-start items-start gap-4">
           {data.map((item) => (
             <div
               key={item.poNumber}
               className={cn([
-                "self-stretch inline-flex justify-between items-center",
-                data.indexOf(item) !== data.length - 1 &&
-                  "pb-2 border-b border-slate-200",
+                'self-stretch inline-flex justify-between items-center',
+                data.indexOf(item) !== data.length - 1 && 'pb-2 border-b border-slate-200',
               ])}
             >
               <div className="w-32 inline-flex flex-col justify-start items-start">
@@ -72,10 +67,7 @@ const PosAwaitingReceiptCard = () => {
                 </CardSecondaryText>
               </div>
               <div className="w-32 inline-flex flex-col justify-start items-end">
-                <Badge
-                  title={item.status}
-                  variant={getStatusVariant(item.status)}
-                />
+                <Badge title={item.status} variant={getStatusVariant(item.status)} />
               </div>
             </div>
           ))}

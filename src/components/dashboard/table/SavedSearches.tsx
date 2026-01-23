@@ -1,6 +1,6 @@
-import ChevronRightIcon from "@/assets/icons/chevron-right.svg";
-import { cn } from "@/lib/utils";
-import { useRef } from "react";
+import ChevronRightIcon from '@/assets/icons/chevron-right.svg';
+import { cn } from '@/lib/utils';
+import { useRef } from 'react';
 
 interface ISearchTabProps {
   label: string;
@@ -19,25 +19,21 @@ interface ISavedSearchesProps {
   savedSearches: string[];
 }
 
-const SearchTab: React.FC<ISearchTabProps> = ({
-  label,
-  isActive = false,
-  onClick,
-}) => {
+const SearchTab: React.FC<ISearchTabProps> = ({ label, isActive = false, onClick }) => {
   return (
     <button
       onClick={onClick}
       className={cn(
-        "h-10 px-4 py-0.5 rounded flex flex-col justify-center items-start gap-1.5 shrink-0 cursor-pointer transition-colors",
+        'h-10 px-4 py-0.5 rounded flex flex-col justify-center items-start gap-1.5 shrink-0 cursor-pointer transition-colors',
         isActive
-          ? "bg-white outline-2 -outline-offset-2 outline-tertiary"
-          : "bg-gray-50 outline-1 -outline-offset-1 outline-gray-200 hover:bg-gray-100"
+          ? 'bg-white outline-2 -outline-offset-2 outline-tertiary'
+          : 'bg-gray-50 outline-1 -outline-offset-1 outline-gray-200 hover:bg-gray-100'
       )}
     >
       <p
         className={cn(
-          "justify-center text-xs whitespace-nowrap",
-          isActive ? "text-tertiary font-bold" : "text-zinc-500 font-normal"
+          'justify-center text-xs whitespace-nowrap',
+          isActive ? 'text-tertiary font-bold' : 'text-zinc-500 font-normal'
         )}
       >
         {label}
@@ -46,11 +42,7 @@ const SearchTab: React.FC<ISearchTabProps> = ({
   );
 };
 
-const ArrowButton: React.FC<IArrowButtonProps> = ({
-  icon,
-  classname,
-  onClick,
-}) => {
+const ArrowButton: React.FC<IArrowButtonProps> = ({ icon, classname, onClick }) => {
   return (
     <button
       onClick={onClick}
@@ -59,28 +51,25 @@ const ArrowButton: React.FC<IArrowButtonProps> = ({
       <img
         src={icon}
         alt="Previous"
-        className={cn(["w-6 h-6 invert", classname ? classname : ""])}
+        className={cn(['w-6 h-6 invert', classname ? classname : ''])}
       />
     </button>
   );
 };
 
-const SavedSearches: React.FC<ISavedSearchesProps> = ({
-  title,
-  savedSearches,
-}) => {
+const SavedSearches: React.FC<ISavedSearchesProps> = ({ title, savedSearches }) => {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
 
-  const handleScroll = (direction: "left" | "right") => {
+  const handleScroll = (direction: 'left' | 'right') => {
     if (scrollContainerRef.current) {
       const scrollAmount = 300;
       const newScrollLeft =
         scrollContainerRef.current.scrollLeft +
-        (direction === "right" ? scrollAmount : -scrollAmount);
+        (direction === 'right' ? scrollAmount : -scrollAmount);
 
       scrollContainerRef.current.scrollTo({
         left: newScrollLeft,
-        behavior: "smooth",
+        behavior: 'smooth',
       });
     }
   };
@@ -97,7 +86,7 @@ const SavedSearches: React.FC<ISavedSearchesProps> = ({
       <ArrowButton
         icon={ChevronRightIcon}
         classname="rotate-180"
-        onClick={() => handleScroll("left")}
+        onClick={() => handleScroll('left')}
       />
 
       {/* Scrollable Saved Searches */}
@@ -111,10 +100,7 @@ const SavedSearches: React.FC<ISavedSearchesProps> = ({
       </div>
 
       {/* Right Arrow */}
-      <ArrowButton
-        icon={ChevronRightIcon}
-        onClick={() => handleScroll("right")}
-      />
+      <ArrowButton icon={ChevronRightIcon} onClick={() => handleScroll('right')} />
     </div>
   );
 };

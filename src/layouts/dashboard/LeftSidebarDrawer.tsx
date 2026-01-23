@@ -3,11 +3,11 @@ import {
   drawerMenuItems,
   type IDrawerMenuItem,
   type IActionItem,
-} from "@/constants/navigation";
-import { cn } from "@/lib/utils";
-import { useState } from "react";
-import { useLocation, useNavigate } from "react-router";
-import ChevronRightIcon from "@/assets/icons/chevron-right.svg";
+} from '@/constants/navigation';
+import { cn } from '@/lib/utils';
+import { useState } from 'react';
+import { useLocation, useNavigate } from 'react-router';
+import ChevronRightIcon from '@/assets/icons/chevron-right.svg';
 
 interface IMenuSectionProps {
   items: IDrawerMenuItem[];
@@ -20,7 +20,7 @@ interface IMenuSectionProps {
       name: string;
       path: string;
       getContent?: () => React.ReactNode;
-    },
+    }
   ) => void;
   isItemActive: (id: string) => boolean;
   isChildActive: (id: string) => boolean;
@@ -33,11 +33,7 @@ interface IQuickLinksProps {
 
 interface ILeftSidebarDrawerProps {
   setShowDrawer: React.Dispatch<React.SetStateAction<boolean>>;
-  addTab: (tab: {
-    id: string;
-    title: string;
-    content: React.ReactNode;
-  }) => void;
+  addTab: (tab: { id: string; title: string; content: React.ReactNode }) => void;
   activeTabId: string | null;
   goToHome: () => void;
 }
@@ -63,25 +59,20 @@ const MenuSection = ({
               <button
                 onClick={() => toggleExpanded(index)}
                 className={cn(
-                  "p-2 rounded-md flex items-center justify-between gap-3 transition-colors w-full text-left",
-                  isExpanded
-                    ? "bg-tertiary text-white"
-                    : "text-gray-500 hover:bg-gray-100",
+                  'p-2 rounded-md flex items-center justify-between gap-3 transition-colors w-full text-left',
+                  isExpanded ? 'bg-tertiary text-white' : 'text-gray-500 hover:bg-gray-100'
                 )}
               >
                 <div className="flex items-center gap-3">
                   <img
                     src={item.icon}
                     alt={item.name}
-                    className={cn(
-                      "w-5 h-5 transition-all",
-                      isExpanded && "brightness-0 invert",
-                    )}
+                    className={cn('w-5 h-5 transition-all', isExpanded && 'brightness-0 invert')}
                   />
                   <span
                     className={cn(
-                      "justify-start text-base font-normal",
-                      isExpanded ? "text-white" : "text-gray-500",
+                      'justify-start text-base font-normal',
+                      isExpanded ? 'text-white' : 'text-gray-500'
                     )}
                   >
                     {item.name}
@@ -91,8 +82,8 @@ const MenuSection = ({
                   src={ChevronRightIcon}
                   alt="Menu"
                   className={cn(
-                    "w-6 h-6 transition-transform",
-                    isExpanded ? "rotate-270" : "rotate-90 invert opacity-70",
+                    'w-6 h-6 transition-transform',
+                    isExpanded ? 'rotate-270' : 'rotate-90 invert opacity-70'
                   )}
                 />
               </button>
@@ -100,24 +91,19 @@ const MenuSection = ({
               <button
                 onClick={() => onItemClick(item)}
                 className={cn(
-                  "p-2 rounded-md flex items-center gap-3 transition-colors w-full text-left",
-                  isActive
-                    ? "bg-tertiary text-white"
-                    : "text-gray-500 hover:bg-gray-100",
+                  'p-2 rounded-md flex items-center gap-3 transition-colors w-full text-left',
+                  isActive ? 'bg-tertiary text-white' : 'text-gray-500 hover:bg-gray-100'
                 )}
               >
                 <img
                   src={item.icon}
                   alt={item.name}
-                  className={cn(
-                    "w-5 h-5 transition-all",
-                    isActive && "brightness-0 invert",
-                  )}
+                  className={cn('w-5 h-5 transition-all', isActive && 'brightness-0 invert')}
                 />
                 <span
                   className={cn(
-                    "justify-start text-base font-normal",
-                    isActive ? "text-white" : "text-gray-500",
+                    'justify-start text-base font-normal',
+                    isActive ? 'text-white' : 'text-gray-500'
                   )}
                 >
                   {item.name}
@@ -135,10 +121,10 @@ const MenuSection = ({
                       key={childIndex}
                       onClick={() => onItemClick(item, child)}
                       className={cn(
-                        "p-1.5 rounded-md text-sm transition-colors w-full text-left",
+                        'p-1.5 rounded-md text-sm transition-colors w-full text-left',
                         isChildActiveState
-                          ? "bg-tertiary/20 text-tertiary font-semibold"
-                          : "text-gray-600 hover:bg-gray-100",
+                          ? 'bg-tertiary/20 text-tertiary font-semibold'
+                          : 'text-gray-600 hover:bg-gray-100'
                       )}
                     >
                       {child.name}
@@ -199,13 +185,13 @@ const LeftSidebarDrawer: React.FC<ILeftSidebarDrawerProps> = ({
 
   const toggleExpanded = (index: number) => {
     setExpandedItems((prev) =>
-      prev.includes(index) ? prev.filter((i) => i !== index) : [...prev, index],
+      prev.includes(index) ? prev.filter((i) => i !== index) : [...prev, index]
     );
   };
 
   // Check if an item is active based on activeTabId
   const isItemActive = (id: string) => {
-    if (id === "home" && currentPath === "/") {
+    if (id === 'home' && currentPath === '/') {
       return activeTabId === null;
     }
     return activeTabId === id;
@@ -223,16 +209,16 @@ const LeftSidebarDrawer: React.FC<ILeftSidebarDrawerProps> = ({
       name: string;
       path: string;
       getContent?: () => React.ReactNode;
-    },
+    }
   ) => {
     const path = child?.path || item.path;
 
     if (!path) return;
 
-    if (path === "/") {
+    if (path === '/') {
       // Navigate to home
       goToHome();
-      navigate("/");
+      navigate('/');
       setShowDrawer(false);
     } else {
       // Open as tab using getContent
@@ -265,10 +251,7 @@ const LeftSidebarDrawer: React.FC<ILeftSidebarDrawerProps> = ({
   return (
     <>
       {/* Backdrop */}
-      <div
-        className="fixed inset-0 z-40"
-        onClick={() => setShowDrawer(false)}
-      />
+      <div className="fixed inset-0 z-40" onClick={() => setShowDrawer(false)} />
 
       {/* Drawer */}
       <div className="fixed top-14 left-0 w-64 h-full bg-white shadow-lg z-50 border-r border-slate-200">
@@ -295,11 +278,7 @@ const LeftSidebarDrawer: React.FC<ILeftSidebarDrawerProps> = ({
           className="w-6 h-6 top-0 right-0 absolute bg-tertiary rounded-bl-[10px] flex flex-col justify-center items-center gap-2.5 hover:bg-tertiary/90 transition-colors"
           onClick={() => setShowDrawer((prev) => !prev)}
         >
-          <img
-            src={ChevronRightIcon}
-            alt="Menu"
-            className="w-5 h-5 rotate-180"
-          />
+          <img src={ChevronRightIcon} alt="Menu" className="w-5 h-5 rotate-180" />
         </button>
       </div>
     </>

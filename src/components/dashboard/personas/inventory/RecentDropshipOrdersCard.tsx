@@ -6,33 +6,29 @@ import DashboardCard, {
   CardTableRow,
   CardTableCell,
   CardTableCellPrimary,
-} from "@/components/dashboard/DashboardCard";
+} from '@/components/dashboard/DashboardCard';
 
 const data = [
   {
-    orderId: "DS001",
-    vendor: "Acme Wholesale",
-    tracking: "1Z09872267T252564276",
+    orderId: 'DS001',
+    vendor: 'Acme Wholesale',
+    tracking: '1Z09872267T252564276',
   },
   {
-    orderId: "DS002",
-    vendor: "Global Supply Partner",
-    tracking: "1Z09872267T252564276",
+    orderId: 'DS002',
+    vendor: 'Global Supply Partner',
+    tracking: '1Z09872267T252564276',
   },
   {
-    orderId: "DS003",
-    vendor: "QuickShip Distributors",
-    tracking: "1Z09872267T252564276",
+    orderId: 'DS003',
+    vendor: 'QuickShip Distributors',
+    tracking: '1Z09872267T252564276',
   },
 ];
 
 const RecentDropshipOrdersCard = () => {
   return (
-    <DashboardCard
-      title="Recent Dropship Orders (3)"
-      showViewAll={true}
-      viewAllLink="#"
-    >
+    <DashboardCard title="Recent Dropship Orders (3)" showViewAll={true} viewAllLink="#">
       <CardTable>
         {/* Table Header */}
         <CardTableHeader>
@@ -45,13 +41,9 @@ const RecentDropshipOrdersCard = () => {
         <CardTableBody>
           {data.map((item, index) => (
             <CardTableRow key={item.orderId} isLast={index === data.length - 1}>
-              <CardTableCellPrimary width="w-32">
-                {item.orderId}
-              </CardTableCellPrimary>
+              <CardTableCellPrimary width="w-32">{item.orderId}</CardTableCellPrimary>
               <CardTableCell width="w-36">{item.vendor}</CardTableCell>
-              <CardTableCell width="w-52 text-tertiary">
-                {item.tracking}
-              </CardTableCell>
+              <CardTableCell width="w-52 text-tertiary">{item.tracking}</CardTableCell>
             </CardTableRow>
           ))}
         </CardTableBody>

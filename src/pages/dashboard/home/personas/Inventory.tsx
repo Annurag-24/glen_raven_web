@@ -3,7 +3,7 @@ import {
   TransferOrderMovements,
   RecentDropshipOrdersCard,
   InventoryAuditAndCostHistoryCard,
-} from "@/components/dashboard/personas/inventory";
+} from '@/components/dashboard/personas/inventory';
 
 const InventoryPersona = () => {
   return (

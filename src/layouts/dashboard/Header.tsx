@@ -1,6 +1,6 @@
-import UserIcon from "@/assets/icons/user.png";
-import DownIcon from "@/assets/icons/chevron-down.svg";
-import { Link } from "react-router";
+import UserIcon from '@/assets/icons/user.png';
+import DownIcon from '@/assets/icons/chevron-down.svg';
+import { Link } from 'react-router';
 
 const Header = () => {
   return (
@@ -12,21 +12,13 @@ const Header = () => {
           </Link>
         </div>
         <div className="flex justify-start items-center gap-3">
-          <img
-            className="w-7 h-7 rounded-full"
-            src={UserIcon}
-            alt="User Icon"
-          />
+          <img className="w-7 h-7 rounded-full" src={UserIcon} alt="User Icon" />
           <div className="flex justify-start items-center gap-4">
             <div className="text-center justify-start text-slate-950 text-sm font-normal font-['Inter'] leading-5">
               Call Center Agent
             </div>
           </div>
-          <img
-            src={DownIcon}
-            alt="Dropdown Icon"
-            className="inline-block w-3 h-2"
-          />
+          <img src={DownIcon} alt="Dropdown Icon" className="inline-block w-3 h-2" />
         </div>
       </div>
     </div>

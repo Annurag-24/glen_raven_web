@@ -1,7 +1,4 @@
-import {
-  AlertsListCard,
-  SavedSearches,
-} from "@/components/dashboard/personas/call-center";
+import { AlertsListCard, SavedSearches } from '@/components/dashboard/personas/call-center';
 
 const CallCenterPersona = () => {
   return (
