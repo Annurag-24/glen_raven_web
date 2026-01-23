@@ -4,7 +4,7 @@ import QuickTasks from "@/components/orders/QuickTasks";
 import OrderDetails from "@/components/orders/OrderDetails";
 import OrderSummary from "@/components/orders/OrderSummary";
 import DeliverAddress from "./DeliverAddress";
-import OrderHeader from "./orderHeader";
+import OrderHeader, { type OrderStatus } from "./OrderHeader";
 import DeliverIcon from "@/assets/icons/delivery.svg";
 import OrderTabs, { type TabItem } from "@/components/orders/OrderTabs";
 import LineItemsList from "@/components/orders/LineItemsList";
@@ -168,7 +168,7 @@ const OrderTracking = () => {
                 contactDetails={orderData.contactDetails}
                 customerNotes={orderData.customerNotes}
                 orderNumber={orderData.orderNumber}
-                orderStatus={orderData.orderStatus as any}
+                orderStatus={orderData.orderStatus as OrderStatus}
                 orderDate={orderData.orderDate}
                 orderNotes={orderData.orderNotes}
             />

@@ -88,6 +88,8 @@ const OrderLinesTable = () => {
         console.log("Selected order line:", data);
     };
 
+    console.log("selectedOrderLine: ", selectedOrderLine);
+
     return (
         <div className="p-4 bg-white rounded-lg">
             <Table

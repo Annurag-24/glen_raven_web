@@ -14,7 +14,7 @@ import ResolveHoldsIcon from "@/assets/icons/resolve-holds.svg";
 import TrackShipmentIcon from "@/assets/icons/track-shipment.svg";
 import AllOrders from "@/pages/dashboard/tabs/orders/All";
 
-import OrderTracking from "@/pages/dashboard/tabs/orders/orderTrack";
+import OrderTracking from "@/pages/dashboard/tabs/orders/OrderTrack";
 import AllCustomers from "@/pages/dashboard/tabs/customers/All";
 import OrderLines from "@/pages/dashboard/tabs/order-lines/OrderLines";
 

@@ -1,10 +1,8 @@
 import {
     Stepper,
-    StepperContent,
     StepperIndicator,
     StepperItem,
     StepperNav,
-    StepperPanel,
     StepperTrigger,
 } from '@/components/ui/Stepper';
 import { Check, Circle } from 'lucide-react';
