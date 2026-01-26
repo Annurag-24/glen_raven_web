@@ -33,16 +33,17 @@ const DeliverAddress: React.FC<DeliverAddressProps> = ({
 
     return (
         <div className={cn("bg-white p-4 rounded-lg", className)}>
-            <div className="flex items-start gap-3">
+            <div className="flex items-center gap-3">
                 {/* Icon */}
+                <div className="w-[28px] h-[28px] rounded-full bg-[#E6F1FD] flex items-center justify-center">
                 <img
                     src={address.icon}
                     alt="Deliver Icon"
-                    className="w-5 h-5 mt-1"
+                    className="object-contain"
                 />
-
+</div>
                 {/* Text Content */}
-                <div className="flex flex-col">
+                <div className="flex flex-col gap-[8px]">
                     <span className="text-sm font-semibold text-gray-800">
                         Deliver To
                     </span>

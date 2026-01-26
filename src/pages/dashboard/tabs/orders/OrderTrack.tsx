@@ -1,35 +1,31 @@
 import { useState } from "react";
+import OrderHeader from "./OrderHeader";
 import OrderProgressBar from "./OrderProgressBar";
+import { Tabs } from "@/components/orders/tabs";
+import { getOrderTabs } from "./OrderTabsConfig";
 import QuickTasks from "@/components/orders/QuickTasks";
 import OrderDetails from "@/components/orders/OrderDetails";
 import OrderSummary from "@/components/orders/OrderSummary";
+import LineItem, { type LineItemData } from "@/components/orders/LineItem";
+import PricingContent from "@/components/orders/PricingContent";
+import DeliverIcon from "@/assets/icons/deliver.svg";
 import DeliverAddress from "./DeliverAddress";
-import OrderHeader, { type OrderStatus } from "./OrderHeader";
-import DeliverIcon from "@/assets/icons/delivery.svg";
-import OrderTabs, { type TabItem } from "@/components/orders/OrderTabs";
-import LineItemsList from "@/components/orders/LineItemsList";
-import { type LineItemData } from "@/components/orders/LineItem";
 
 const OrderTracking = () => {
     const [activeTab, setActiveTab] = useState<string>("line-items");
 
-    // Example data - replace with actual data from API/state
+    // Order data - replace with actual data from API/state
     const orderData = {
         customerName: "Anya Sharma",
         customerTags: [
             { label: "Trivantage +", variant: "trivant" as const },
             { label: "Active", variant: "active" as const },
         ],
-        poNumber: "#315156465",
         paymentTerms: "Net 30",
         orderNumber: "4445636",
+        poNumber: "#315156465",
         orderStatus: "confirmed",
         orderDate: new Date("2024-05-28T10:30:00"),
-
-        changeContact: [
-            { label: "View Contact", value: "view", onClick: () => console.log("View contact") },
-            { label: "Edit Contact", value: "edit", onClick: () => console.log("Edit contact") },
-        ],
         contactDetails: [
             { label: "View Details", value: "view", onClick: () => console.log("View contact details") },
             { label: "Edit Details", value: "edit", onClick: () => console.log("Edit contact details") },
@@ -66,14 +62,14 @@ const OrderTracking = () => {
             label: "Confirmed",
             date: "Expected by, 12th Dec",
             completedBy: "John Doe",
-            isCompleted: true,
-            isCurrent: false,
+            isCompleted: false,
+            isCurrent: true,
         },
         {
             id: "shipped",
             label: "Shipped",
             isCompleted: false,
-            isCurrent: true,
+            isCurrent: false,
         },
         {
             id: "delivered",
@@ -83,18 +79,7 @@ const OrderTracking = () => {
         },
     ];
 
-
-    const DeliveryAddress = {
-        line1: "123, Street Wall",
-        area: "Bay Wood",
-        city: "New York",
-        state: "DC",
-        country: "USA",
-        postalCode: "10001",
-        icon: DeliverIcon
-    };
-
-    // Sample line items data
+    // Line items data - replace with actual data from API
     const lineItems: LineItemData[] = [
         {
             id: "1",
@@ -132,68 +117,81 @@ const OrderTracking = () => {
         },
     ];
 
-    // Tab configuration
-    const tabs: TabItem[] = [
-        {
-            id: "line-items",
-            label: "Line Items",
-            content: <LineItemsList items={lineItems} />,
-        },
-        {
-            id: "discount-pricing",
-            label: "Discount & Pricing",
-        },
-        {
-            id: "shipping-fulfillment",
-            label: "Shipping & Fulfillment",
-        },
-        {
-            id: "special-services",
-            label: "Special Services",
-        },
-        {
-            id: "notes-instructions",
-            label: "Notes & Instructions",
-        },
-    ];
+    // Discount & Pricing data
+    const pricingData = {
+        subtotal: "$260.00",
+        discounts: [
+            { label: "Bulk Order Discount", value: "-$52.00", type: "percentage" },
+            { label: "Customer Loyalty", value: "-$10.00", type: "fixed" },
+        ],
+        totalDiscount: "-$62.00",
+        finalPrice: "$198.00",
+    };
+
+
+    const DeliveryAddress = {
+        line1: "123, Street Wall",
+        area: "Bay Wood",
+        city: "New York",
+        state: "DC",
+        country: "USA",
+        postalCode: "10001",
+        icon: DeliverIcon
+    };
+
+    const tabs = getOrderTabs( {
+        lineItemsContent: (
+            <>
+                <div className="p-4 flex space-y-[12px] flex-col">
+                    {lineItems.map((item) => (
+                        <LineItem key={item.id} item={item} />
+
+                    ))}
+                </div>
+            </>
+        ),
+        pricingContent: <PricingContent data={pricingData} className="p-4" />,
+    });
+
 
     return (
-        <div className="w-full bg-[#F9FAFB] min-h-screen">
+        <div className="w-full  min-h-screen">
             {/* Header Section */}
-            <OrderHeader
-                customerName={orderData.customerName}
-                customerTags={orderData.customerTags}
-                poNumber={orderData.poNumber}
-                paymentTerms={orderData.paymentTerms}
-                contactDetails={orderData.contactDetails}
-                customerNotes={orderData.customerNotes}
-                orderNumber={orderData.orderNumber}
-                orderStatus={orderData.orderStatus as OrderStatus}
-                orderDate={orderData.orderDate}
-                orderNotes={orderData.orderNotes}
-            />
+            <div className="">
+                <OrderHeader
+                    customerName={orderData.customerName}
+                    customerTags={orderData.customerTags}
+                    poNumber={orderData.poNumber}
+                    paymentTerms={orderData.paymentTerms}
+                    contactDetails={orderData.contactDetails}
+                    customerNotes={orderData.customerNotes}
+                    orderNumber={orderData.orderNumber}
+                    orderStatus={orderData.orderStatus as any}
+                    orderDate={orderData.orderDate}
+                    orderNotes={orderData.orderNotes}
+                />
+            </div>
             {/* Main Content Grid - Left content and Right sidebar */}
-            <div className="grid grid-cols-1 lg:grid-cols-[1fr_320px] gap-6 px-6 py-6">
+            <div className="grid grid-cols-1 lg:grid-cols-[1fr_320px]   ">
                 {/* Left Side - Stepper and Main Content */}
-                <div className="space-y-6">
+                <div className="space-y-6 border-r border-[#A4A4A429]">
                     {/* Stepper Component */}
-                    <div className="border-b border-[#A4A4A429] pb-[15px] ">
+                    <div className="border-b border-[#A4A4A429] py-[15px] mb-0  bg-[#FFFFFF] ">
                         <OrderProgressBar steps={progressSteps} />
                     </div>
 
-                    {/* Deliver To Section */}
                     <DeliverAddress address={DeliveryAddress} />
-
                     {/* Tabs Section */}
-                    <OrderTabs
-                        tabs={tabs}
-                        activeTabId={activeTab}
-                        onTabChange={setActiveTab}
+                    <Tabs
+                        value={activeTab}
+                        onChange={setActiveTab}
+                        items={tabs}
                     />
+
                 </div>
 
                 {/* Right Side - Sidebar */}
-                <div className="space-y-6">
+                <div className="space-y-6 p-[20px] bg-[#FFFFFF]">
                     <QuickTasks
                         tasks={[
                             { label: "Print Order", onClick: () => console.log("Print Order") },

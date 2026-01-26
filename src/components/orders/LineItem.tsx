@@ -1,3 +1,4 @@
+import React from "react";
 import Badge from "@/components/Badge";
 import PencilIcon from "@/assets/icons/pencil.svg";
 import { cn } from "@/lib/utils";
@@ -21,11 +22,11 @@ export type LineItemData = {
     className?: string;
 };
 
-type LineItemProps = {
+interface ILineItemProps {
     item: LineItemData;
-};
+}
 
-export default function LineItem({ item }: LineItemProps) {
+const LineItem: React.FC<ILineItemProps> = ({ item }) => {
     const stockStatusConfig = {
         "in-stock": { label: "In Stock", variant: "active" as const },
         "out-of-stock": { label: "Out of Stock", variant: "error" as const },
@@ -148,4 +149,6 @@ export default function LineItem({ item }: LineItemProps) {
             </div>
         </div>
     );
-}
+};
+
+export default LineItem;
