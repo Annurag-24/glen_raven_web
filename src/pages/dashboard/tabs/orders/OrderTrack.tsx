@@ -161,6 +161,7 @@ const OrderTracking = () => {
                 <OrderHeader
                     customerName={orderData.customerName}
                     customerTags={orderData.customerTags}
+                    
                     poNumber={orderData.poNumber}
                     paymentTerms={orderData.paymentTerms}
                     contactDetails={orderData.contactDetails}
