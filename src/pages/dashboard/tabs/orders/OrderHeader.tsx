@@ -12,6 +12,7 @@ export type CustomerTag = {
 };
 
 
+
 export type OrderHeaderProps = {
     // Customer Info (Left Side)
     customerName: string;
@@ -35,6 +36,7 @@ export type OrderHeaderProps = {
     // Optional customizations
     className?: string;
 };
+
 
 const statusConfig: Record<OrderStatus, { label: string; variant: BadgeVariant }> = {
     confirmed: { label: "Confirmed", variant: "confirmed" },
