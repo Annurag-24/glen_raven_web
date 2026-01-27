@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Plus } from "lucide-react";
 import OrderHeader from "./OrderHeader";
 import OrderProgressBar from "./OrderProgressBar";
 import { Tabs } from "@/components/orders/tabs";
@@ -8,10 +9,16 @@ import OrderDetails from "@/components/orders/OrderDetails";
 import OrderSummary from "@/components/orders/OrderSummary";
 import LineItem, { type LineItemData } from "@/components/orders/LineItem";
 import PricingContent from "@/components/orders/PricingContent";
+import OrderUserInfo from "@/components/orders/OrderUserInfo";
+import { Button } from "@/components/ui/button";
 import DeliverIcon from "@/assets/icons/deliver.svg";
 import DeliverAddress from "./DeliverAddress";
+import TableSearchHeader from "@/components/dashboard/search/TableSearchHeader";
+import OrdersTable from "@/components/dashboard/table/OrdersTable";
+import OrderRightBar from "./OrderRightBar";
 
 const OrderTracking = () => {
+    const [searchValue, setSearchValue] = useState("");
     const [activeTab, setActiveTab] = useState<string>("line-items");
 
     // Order data - replace with actual data from API/state
@@ -139,7 +146,7 @@ const OrderTracking = () => {
         icon: DeliverIcon
     };
 
-    const tabs = getOrderTabs( {
+    const tabs = getOrderTabs({
         lineItemsContent: (
             <>
                 <div className="p-4 flex space-y-[12px] flex-col">
@@ -154,74 +161,159 @@ const OrderTracking = () => {
     });
 
 
+    const discounts = [
+        {
+            title: "15% off Bulk Orders",
+            description: "Applied to orders over $5,000",
+            icon: "tag" as const,
+        },
+        {
+            title: "Free Freight Shipping",
+            description: "Active on all shipments",
+            icon: "truck" as const,
+        },
+    ];
+
+    const paymentTerm = orderData.paymentTerms;
+
+
     return (
-        <div className="w-full  min-h-screen">
-            {/* Header Section */}
-            <div className="">
-                <OrderHeader
-                    customerName={orderData.customerName}
-                    customerTags={orderData.customerTags}
-                    
-                    poNumber={orderData.poNumber}
-                    paymentTerms={orderData.paymentTerms}
-                    contactDetails={orderData.contactDetails}
-                    customerNotes={orderData.customerNotes}
-                    orderNumber={orderData.orderNumber}
-                    orderStatus={orderData.orderStatus as any}
-                    orderDate={orderData.orderDate}
-                    orderNotes={orderData.orderNotes}
-                />
-            </div>
-            {/* Main Content Grid - Left content and Right sidebar */}
-            <div className="grid grid-cols-1 lg:grid-cols-[1fr_320px]   ">
-                {/* Left Side - Stepper and Main Content */}
-                <div className="space-y-6 border-r border-[#A4A4A429]">
-                    {/* Stepper Component */}
-                    <div className="border-b border-[#A4A4A429] py-[15px] mb-0  bg-[#FFFFFF] ">
-                        <OrderProgressBar steps={progressSteps} />
+        <>
+            <div className="w-full  min-h-screen">
+                {/* Header Section */}
+                <div className="">
+                    <OrderHeader
+                        customerName={orderData.customerName}
+                        customerTags={orderData.customerTags}
+
+                        poNumber={orderData.poNumber}
+                        paymentTerms={orderData.paymentTerms}
+                        contactDetails={orderData.contactDetails}
+                        customerNotes={orderData.customerNotes}
+                        orderNumber={orderData.orderNumber}
+                        orderStatus={orderData.orderStatus as any}
+                        orderDate={orderData.orderDate}
+                        orderNotes={orderData.orderNotes}
+                    />
+                </div>
+                {/* Main Content Grid - Left content and Right sidebar */}
+                <div className="grid grid-cols-1 lg:grid-cols-[1fr_320px]   ">
+                    {/* Left Side - Stepper and Main Content */}
+                    <div className="space-y-6 border-r border-[#A4A4A429]">
+                        {/* Stepper Component */}
+                        <div className="border-b border-[#A4A4A429] py-[15px] mb-0  bg-[#FFFFFF] ">
+                            <OrderProgressBar steps={progressSteps} />
+                        </div>
+
+                        <DeliverAddress address={DeliveryAddress} />
+                        {/* Tabs Section */}
+                        <Tabs
+                            value={activeTab}
+                            onChange={setActiveTab}
+                            items={tabs}
+                        />
+
                     </div>
 
-                    <DeliverAddress address={DeliveryAddress} />
-                    {/* Tabs Section */}
-                    <Tabs
-                        value={activeTab}
-                        onChange={setActiveTab}
-                        items={tabs}
-                    />
+                    {/* Right Side - Sidebar */}
+                    <div className="space-y-6 p-[20px] bg-[#FFFFFF]">
 
-                </div>
+                        <QuickTasks
+                        sections={[
+                            {
+                              title: "Order Related",
+                              items: [
+                                { label: "Print Order", onClick: () => console.log("Print Order") },
+                                { label: "Edit Order", onClick: () => console.log("Edit Order") },
+                                { label: "Track Shipment", isActive: true, onClick: () => console.log("Track Shipment") },
+                                { label: "Download Invoice", onClick: () => console.log("Download Invoice") },
+                              ],
+                            },
+                          ]}
+                          
+                        />
 
-                {/* Right Side - Sidebar */}
-                <div className="space-y-6 p-[20px] bg-[#FFFFFF]">
-                    <QuickTasks
-                        tasks={[
-                            { label: "Print Order", onClick: () => console.log("Print Order") },
-                            { label: "Edit Order", onClick: () => console.log("Edit Order") },
-                            { label: "Track Shipment", isActive: true, onClick: () => console.log("Track Shipment") },
-                            { label: "Download Invoice", onClick: () => console.log("Download Invoice") },
-                        ]}
-                    />
 
-                    <OrderDetails
-                        details={[
-                            { label: "Order Type", value: "Export Order" },
-                            { label: "Payment", value: "Net 30" },
-                            { label: "Payment Account", value: "Corporate Gear" },
-                        ]}
-                    />
+                        <OrderDetails
+                            details={[
+                                { label: "Order Type", value: "Export Order" },
+                                { label: "Payment", value: "Net 30" },
+                                { label: "Payment Account", value: "Corporate Gear" },
+                            ]}
+                        />
 
-                    <OrderSummary
-                        items={[
-                            { label: "Subtotal", value: "$138.00" },
-                            { label: "Shipping", value: "$5.00" },
-                            { label: "Tax", value: "$7.00" },
-                            { label: "Discounts", value: "$0.00" },
-                        ]}
-                        total="$150.00"
-                    />
+                        <OrderSummary
+                            items={[
+                                { label: "Subtotal", value: "$138.00" },
+                                { label: "Shipping", value: "$5.00" },
+                                { label: "Tax", value: "$7.00" },
+                                { label: "Discounts", value: "$0.00" },
+                            ]}
+                            total="$150.00"
+                        />
+                    </div>
                 </div>
             </div>
-        </div>
+
+
+
+            {/* Order User Info Section */}
+            <div className="grid grid-cols-1 lg:grid-cols-[1fr_320px]   ">
+                <div className="">
+                <div className="flex items-center justify-between bg-[#FFFFFF] py-[18px] px-[24px]">
+                    <OrderUserInfo
+                        customerName={orderData.customerName}
+                        customerTags={orderData.customerTags}
+                        poNumber={orderData.poNumber}
+                        paymentTerms={orderData.paymentTerms}
+                        contactDetails={orderData.contactDetails}
+                        customerNotes={orderData.customerNotes}
+                    />
+                    <div className="">
+                        <Button
+                            variant="tertiary"
+                            size="default"
+                            onClick={() => console.log("Create Order")}
+                            className="gap-2"
+                        >
+                            Create Order
+                            <Plus className="w-4 h-4" />
+
+                        </Button>
+                    </div>
+
+                </div>
+
+                <div className="mt-[12px]">
+
+                    <TableSearchHeader
+                        title="All Orders"
+                        className="px-[24px]"           // padding lives on the header itself
+                          searchBarProps={{
+                            placeholder: "Search orders",
+                            value: searchValue,
+                            onChange: setSearchValue,
+                            showRefresh: true,
+                            showFilter: true,
+                            showSettings: false,
+                            showExport: false,
+                            // onFilter: () => setFilterOpen(true),
+                            // onSettings: () => setPreferencesOpen(true),
+                        }}
+
+                    />
+                </div>
+                <div className="mt-[12px]"> 
+                <OrdersTable/>
+                </div>
+                </div>
+                <div className="bg-[#FFFFFF] border-l border-[#E4E4E7] p-[20px]">
+                    <OrderRightBar discounts={discounts} paymentTerm={paymentTerm} />
+                </div>
+
+            </div>
+
+        </>
     );
 };
 
