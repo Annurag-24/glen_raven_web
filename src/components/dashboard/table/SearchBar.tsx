@@ -1,4 +1,5 @@
 import React from "react";
+import { cn } from "@/lib/utils";
 import {
     Search,
     RotateCw,
@@ -17,6 +18,7 @@ export type SearchBarCustomButton = {
     show?: boolean;
     className?: string;
     onClick?: () => void;
+    showBorder?: boolean;
 };
 
 export type SearchBarProps = {
@@ -39,6 +41,7 @@ export type SearchBarProps = {
     onClearSearch?: () => void;
     onSaveSearch?: () => void;
     onDeleteSearch?: () => void;
+    showBorder?: boolean;
 };
 
 const IconButton: React.FC<
@@ -80,6 +83,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
     onClearSearch,
     onSaveSearch,
     onDeleteSearch,
+    showBorder = true,
 }) => {
     const isControlled = typeof value !== "undefined";
     const [internal, setInternal] = React.useState(defaultValue ?? "");
@@ -97,7 +101,12 @@ const SearchBar: React.FC<SearchBarProps> = ({
     const inputValue = isControlled ? (value as string) : internal;
 
     return (
-        <div className="w-full bg-white px-3 py-2 flex items-center justify-between border-b border-[#E5E6F0]">
+        <div 
+        className={cn(
+            "w-full bg-white px-3 py-2 flex items-center justify-between",
+            showBorder && "border-b border-[#E5E6F0]"
+          )}
+        >
             <div className={`flex-none w-full ${widthClass} pr-3`}>
                 <div className="relative">
                     <input
